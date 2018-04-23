@@ -20,4 +20,10 @@ public class MainController {
     {
         return "Literatur/tambahliteratur";
     }
+
+    @RequestMapping("/literatur/ubah/")
+    public String ubahLiteratur () {
+        return "Literartur/ubahLiteratur";
+    }
+
 }
