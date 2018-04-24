@@ -20,5 +20,5 @@ public interface SiperpusMapper
             "jumlah = #{siperpus.jumlah}," +
             "status = #{siperpus.status}" +
             "where id = #{siperpus.ic}")
-    static SiperpusModel ubahLiteratur(@Param("siperpus") SiperpusModel siperpus);
+    SiperpusModel ubahLiteratur(@Param("siperpus") SiperpusModel siperpus);
 }

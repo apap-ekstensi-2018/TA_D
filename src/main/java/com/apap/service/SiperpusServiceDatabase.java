@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SiperpusServiceDatabase implements SiperpusService {
+	
     @Override
     public SiperpusModel ubahLiteratur(SiperpusModel siperpus)
     {
         log.info("literatur");
-        return SiperpusMapper.ubahLiteratur(siperpus);
+        return null;
+        //return SiperpusMapper.ubahLiteratur(siperpus);
     }
 }
