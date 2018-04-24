@@ -8,7 +8,7 @@
     <div class="wrapper">
         <div th:replace="fragments/fragment :: header"></div>
         <div th:replace="fragments/fragment :: sidebar"></div>
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color: white;">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -22,86 +22,18 @@
 
             <!-- Main content -->
             <section class="content">
-                <form action="/mahasiswa/tambah/submit" method="post" id="formAdd">
-                    <div class="form-control">
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Nama Lengkap</strong>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="">
+                            <div class='form-group'>
+                                <label >Username</label>
+                                <p>
+                                    <input type='text' value='' class='form-control input-sm' name='username' required placeholder='Username'>
+                                </p>
                             </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="nama" name="nama" required="required" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Tempat Lahir</strong>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" required="required" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Tanggal Lahir</strong>
-                            </div>
-                            <div class="col-md-4" id="tgllahir_parent">
-                                <input type="text" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required="required"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Jenis Kelamin</strong>
-                            </div>
-                            <div class="col-md-4" id="jenkel_parent">
-                                <select id="jenis_kelamin" name="jenis_kelamin" ></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Agama</strong>
-                            </div>
-                            <div class="col-md-4" id="agama_parent">
-                                <select name="agama" id="agama"></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Golongan Darah</strong>
-                            </div>
-                            <div class="col-md-4" id="goldar_parent">
-                                <select name="golongan_darah" id="golongan_darah" ></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Tahun Masuk</strong>
-                            </div>
-                            <div class="col-md-4" id="thnmsk_parent">
-                                <input type="text" class="form-control" name="tahun_masuk" id="tahun_masuk" required="required"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Jalur Masuk</strong>
-                            </div>
-                            <div class="col-md-4" id="jamas_parent">
-                                <select name="jalur_masuk" id="jalur_masuk"></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Program Studi</strong>
-                            </div>
-                            <div class="col-md-4" id="prodi_parent">
-                                <select name="id_prodi" id="id_prodi"></select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit" name="action" value="save" class="btn btn-default">Simpan</button>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </section>
             <!-- /.content -->
         </div>
