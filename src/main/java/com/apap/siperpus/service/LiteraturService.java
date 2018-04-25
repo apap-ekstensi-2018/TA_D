@@ -12,4 +12,6 @@ import java.util.List;
 public interface LiteraturService {
     List<LiteraturModel> selectAllLiteratur ();
 
+    LiteraturModel ubahLiteratur (LiteraturModel literatur);
+
 }

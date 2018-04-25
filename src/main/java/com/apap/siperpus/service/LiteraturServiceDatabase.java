@@ -23,4 +23,11 @@ public class LiteraturServiceDatabase implements LiteraturService {
     public List<LiteraturModel> selectAllLiteratur(){
         return literaturMapper.selectAllLiteratur();
     }
+
+    @Override
+    public LiteraturModel ubahLiteratur(LiteraturModel literatur)
+    {
+        log.info("literatur");
+        return LiteraturMapper.ubahLiteratur(literatur);
+    }
 }
