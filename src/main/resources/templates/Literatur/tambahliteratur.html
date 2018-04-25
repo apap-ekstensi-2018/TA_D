@@ -24,12 +24,48 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="">
+                        <form action="/literatur/tambah" method="post">
                             <div class='form-group'>
-                                <label >Username</label>
+                                <label >Judul</label>
                                 <p>
-                                    <input type='text' value='' class='form-control input-sm' name='username' required placeholder='Username'>
+                                    <input type='text' value='' class='form-control input-sm' name='judul' required placeholder='Judul'>
                                 </p>
+                            </div>
+                            <div class='form-group'>
+                                <label >Penulis</label>
+                                <p>
+                                    <input type='text' value='' class='form-control input-sm' name='penulis' required placeholder='Penulis'>
+                                </p>
+                            </div>
+                            <div class='form-group'>
+                                <label >Penerbit</label>
+                                <p>
+                                    <input type='text' value='' class='form-control input-sm' name='penerbit' required placeholder='Penerbit'>
+                                </p>
+                            </div>
+                            <div class='form-group'>
+                                <label >Penerbit</label>
+                                <p>
+                                    <select name="jenis_literatur" class="form-control input-sm" required>
+                                        <option value="">-- Pilih --</option>
+                                        <option value="Jurnal">Jurnal</option>
+                                        <option value="Buku Referensi">Buku Referensi</option>
+                                        <option value="Publikasi">Publikasi</option>
+                                        <option value="Tugas Akhir">Tugas Akhir</option>
+                                        <option value="Skripsi">Skripsi</option>
+                                        <option value="Tesis">Tesis</option>
+                                        <option value="Disertasi">Disertasi</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class='form-group'>
+                                <label >Jumlah</label>
+                                <p>
+                                    <input type='number' value='' class='form-control input-sm' name='jumlah' required placeholder='Jumlah'>
+                                </p>
+                            </div>
+                            <div>
+                                <button type="submit" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
                             </div>
                         </form>
                     </div>
