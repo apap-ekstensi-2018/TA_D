@@ -25,9 +25,9 @@ public class LiteraturServiceDatabase implements LiteraturService {
     }
 
     @Override
-    public LiteraturModel ubahLiteratur(LiteraturModel literatur)
+    public void ubahLiteratur(LiteraturModel literatur)
     {
         log.info("literatur");
-        return LiteraturMapper.ubahLiteratur(literatur);
+        literaturMapper.ubahLiteratur(literatur);
     }
 }

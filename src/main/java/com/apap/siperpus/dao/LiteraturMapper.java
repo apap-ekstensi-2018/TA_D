@@ -25,5 +25,5 @@ public interface LiteraturMapper {
             "jumlah = #{literatur.jumlah}," +
             "status = #{literatur.status}" +
             "where id = #{literatur.ic}")
-    LiteraturModel ubahLiteratur(@Param("siperpus") LiteraturModel literatur);
+    void ubahLiteratur(LiteraturModel literatur);
 }
