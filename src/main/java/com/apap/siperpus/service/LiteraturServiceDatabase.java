@@ -21,6 +21,19 @@ public class LiteraturServiceDatabase implements LiteraturService {
 
     @Override
     public List<LiteraturModel> selectAllLiteratur(){
+        log.info("Select all literatur");
         return literaturMapper.selectAllLiteratur();
+    }
+
+    @Override
+    public LiteraturModel selectLiteraturByJudul(String judul){
+        log.info("Select literatur by judul "+judul);
+        return literaturMapper.selectLiteraturByJudul(judul);
+    }
+
+    @Override
+    public void insertLiteratur(String judul, String penulis, String penerbit, String jenis_literatur, int jumlah){
+        log.info("Insert literatur judul "+judul);
+        literaturMapper.insertLiteratur(judul, penulis, penerbit, jenis_literatur, jumlah);
     }
 }

@@ -24,11 +24,11 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/literatur/tambah" method="post">
+                        <form action="/literatur/tambah" method="post" id="form">
                             <div class='form-group'>
                                 <label >Judul</label>
                                 <p>
-                                    <input type='text' value='' class='form-control input-sm' name='judul' required placeholder='Judul'>
+                                    <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul'>
                                 </p>
                             </div>
                             <div class='form-group'>
@@ -44,7 +44,7 @@
                                 </p>
                             </div>
                             <div class='form-group'>
-                                <label >Penerbit</label>
+                                <label >Jenis Literatur</label>
                                 <p>
                                     <select name="jenis_literatur" class="form-control input-sm" required>
                                         <option value="">-- Pilih --</option>
@@ -65,7 +65,7 @@
                                 </p>
                             </div>
                             <div>
-                                <button type="submit" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
+                                <button type="button" id="action" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -77,6 +77,69 @@
 
         <div th:replace="fragments/fragment :: footer"></div>
         <div th:replace="fragments/fragment :: javascript"></div>
+
+        <div class="modal modal-danger fade" id="modal-gagal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Gagal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Literatur sudah ada !</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal modal-success fade" id="modal-berhasil">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Berhasil</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Literatur berhasil ditambahkan !</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
 </body>
+<script>
+    $("#action").click(function () {
+        var form = $("#form");
+        var result = form.valid();
+        $("label.error").css('color','red');
+        if(result){
+            $.ajax({
+                url:'/literatur/tambah',
+                method:'post',
+                data:{data:JSON.stringify(form.serializeArray())},
+                dataType:'json',
+                success: function (resp) {
+                    if(resp){
+                        $("#modal-berhasil").modal("show");
+                    }else{
+                        $("#modal-gagal").modal("show");
+                    }
+                },
+                error: function(e){ alert ("Error " + e); }
+            });
+        }
+    });
+</script>
 </html>
