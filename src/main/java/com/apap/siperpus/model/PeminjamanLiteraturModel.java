@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeminjamanLiteratur {
+public class PeminjamanLiteraturModel {
 	private int id;
 	private int idLiteratur;
-	private String usernamePeminjaman;
+	private String usernamePeminjam;
 	private String tanggalPeminjaman;
 	private String tanggalPengembalian;
 	private String statusPeminjaman;

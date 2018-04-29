@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PengadaanLiteratur {
+public class PengadaanLiteraturModel {
 	private int id;
 	private String usernameRequester;
 	private String judul;
