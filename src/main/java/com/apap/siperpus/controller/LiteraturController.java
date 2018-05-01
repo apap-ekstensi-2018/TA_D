@@ -29,11 +29,12 @@ public class LiteraturController {
     @RequestMapping("/literatur/ubah/{id}")
     public String ubahLiteratur (Model model, @PathVariable(value = "id") int id)
     {
-        model.addAttribute("id",id);
-        return "Literartur/ubahLiteratur";
+        LiteraturModel literatur = literaturDAO.selectLiteratur(id);
+        model.addAttribute("literatur",literatur);
+        return "Literatur/ubahLiteratur";
     }
 
-    @RequestMapping(value="/literatur/ubah/submit®",method = RequestMethod.POST)
+    @RequestMapping(value="/literatur/ubah/submit",method = RequestMethod.POST)
     public String ubahLiteraturSubmit(
             @RequestParam(value = "id",required = false) int id,
             @RequestParam(value = "judul",required = false) String judul,
@@ -43,8 +44,8 @@ public class LiteraturController {
             @RequestParam(value = "jumlah",required = false) int jumlah,
             @RequestParam(value = "status",required = false) int status)
     {
-        LiteraturModel literartur = new LiteraturModel(id,judul,penulis,penerbit,jenis_literatur,jumlah,status);
-        literaturDAO.ubahLiteratur(literartur);
-        return "index";
+        LiteraturModel literatur = new LiteraturModel(id,judul,penulis,penerbit,jenis_literatur,jumlah,status);
+        literaturDAO.ubahLiteratur(literatur);
+        return "Literatur/tambah";
     }
 }
