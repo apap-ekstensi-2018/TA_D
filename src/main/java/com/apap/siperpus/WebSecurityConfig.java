@@ -15,6 +15,10 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	private static final String ROLE_STAFF = "staf";
+	private static final String ROLE_MAHASISWA = "mahasiswa";
+	private static final String ROLE_DOSEN = "dosen";
+	
 	@Autowired
 	DataSource dataSource;
 	@Override
@@ -22,9 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/resources/**").permitAll()
-		.antMatchers("/").permitAll()
-		.anyRequest()
-		.authenticated()
+		.antMatchers("/**").hasRole(ROLE_STAFF)
+		.antMatchers("/**").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA)
+		.anyRequest().authenticated()
 		.and()
 		.formLogin()
 		.loginPage("/login").defaultSuccessUrl("/").permitAll()

@@ -27,18 +27,21 @@ public class LiteraturController {
 
     @RequestMapping(value = "/literatur/tambah", method = RequestMethod.POST)
     public @ResponseBody boolean submitLiteratur(Model model, @ModelAttribute("data") String data){
-        JSONArray dataArray = new JSONArray(data);
-        LiteraturModel literatur = literaturDAO.selectLiteraturByJudul(dataArray.getJSONObject(0).getString("value"));
-        if(literatur == null){
-            String judul = dataArray.getJSONObject(0).getString("value");
-            String penulis = dataArray.getJSONObject(1).getString("value");
-            String penerbit = dataArray.getJSONObject(2).getString("value");
-            String jenis_literatur = dataArray.getJSONObject(3).getString("value");
-            int jumlah = dataArray.getJSONObject(4).getInt("value");
-            literaturDAO.insertLiteratur(judul, penulis, penerbit, jenis_literatur, jumlah);
-            return true;
-        }else{
-            return false;
-        }
+        try {
+        	JSONArray dataArray = new JSONArray(data);
+            LiteraturModel literatur = literaturDAO.selectLiteraturByJudul(dataArray.getJSONObject(0).getString("value"));
+            if(literatur == null){
+                String judul = dataArray.getJSONObject(0).getString("value");
+                String penulis = dataArray.getJSONObject(1).getString("value");
+                String penerbit = dataArray.getJSONObject(2).getString("value");
+                String jenis_literatur = dataArray.getJSONObject(3).getString("value");
+                int jumlah = dataArray.getJSONObject(4).getInt("value");
+                literaturDAO.insertLiteratur(judul, penulis, penerbit, jenis_literatur, jumlah);
+                return true;
+            }
+        } catch (Exception e) {
+			// TODO: handle exception
+		}
+    	return false;
     }
 }
