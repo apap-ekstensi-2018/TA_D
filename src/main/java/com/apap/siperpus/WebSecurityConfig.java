@@ -25,20 +25,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/","/resources/**").permitAll()
+		.antMatchers("/").permitAll()
 		.antMatchers("/**").hasRole(ROLE_STAFF)
 		.antMatchers("/**").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA)
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/login").defaultSuccessUrl("/").permitAll()
+		.loginPage("/login").permitAll()
 		.and()
-		.logout()
-		.permitAll();
+		.logout().permitAll();
 	}
 	@Autowired
-	public void configureAuthentication(AuthenticationManagerBuilder auth) throws
-			Exception{
+	public void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception{
 		auth.jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery(
 						"select username, password, 1 from user_account " +
