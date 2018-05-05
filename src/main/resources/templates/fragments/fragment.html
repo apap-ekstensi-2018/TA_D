@@ -59,6 +59,11 @@
                                     <p>
                                         Arsene Wenger - Manager
                                         <small>Member since Jul. 1996</small>
+                                        <small>
+                                            <span th:if ="${#httpServletRequest.isUserInRole('MAHASISWA')}">MAHASISWA</span>
+                                            <span th:if ="${#httpServletRequest.isUserInRole('DOSEN')}">DOSEN</span>
+                                            <span th:if ="${#httpServletRequest.isUserInRole('STAF')}">STAFF</span>
+                                        </small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
