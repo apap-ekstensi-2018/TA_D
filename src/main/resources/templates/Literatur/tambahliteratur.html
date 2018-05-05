@@ -133,6 +133,7 @@
                 success: function (resp) {
                     if(resp){
                         $("#modal-berhasil").modal("show");
+                        form[0].reset();
                     }else{
                         $("#modal-gagal").modal("show");
                     }
