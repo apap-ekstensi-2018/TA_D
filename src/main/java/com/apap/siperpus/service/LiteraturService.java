@@ -12,4 +12,9 @@ import java.util.List;
 public interface LiteraturService {
     List<LiteraturModel> selectAllLiteratur ();
 
+    LiteraturModel selectLiteraturByJudul(String judul);
+
+    void insertLiteratur(String judul, String penulis, String penerbit, String jenis_literatur, int jumlah);
+
+    void deleteLiteratur(int id);
 }
