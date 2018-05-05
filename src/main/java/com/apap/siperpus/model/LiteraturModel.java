@@ -19,5 +19,10 @@ public class LiteraturModel {
     private String penerbit;
     private String jenis_literatur;
     private int jumlah;
+<<<<<<< HEAD
     private int status;
+=======
+    private boolean status;
+    
+>>>>>>> master
 }
