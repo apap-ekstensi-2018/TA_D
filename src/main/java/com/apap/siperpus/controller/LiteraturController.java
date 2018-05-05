@@ -65,4 +65,9 @@ public class LiteraturController {
         literaturDAO.deleteLiteratur(id);
         return "redirect:/literatur/viewall";
     }
+    
+    @RequestMapping("/upload")
+    public String uploadKaryaTulis() {
+    	return "Literatur/uploadKaryaTulis";
+    }
 }
