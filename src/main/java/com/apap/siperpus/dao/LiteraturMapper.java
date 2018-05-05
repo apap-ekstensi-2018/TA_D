@@ -18,6 +18,15 @@ public interface LiteraturMapper {
     @Select("select * from literatur")
     List<LiteraturModel> selectAllLiteratur ();
 
+    @Update("Update student set judul = #{literatur.judul}," +
+            "penulis = #{literatur.penulis}," +
+            "penerbit = #{literatur.penerbit}," +
+            "jenis_literatur = #{literatur.jenis_literatur}," +
+            "jumlah = #{literatur.jumlah}," +
+            "status = #{literatur.status}" +
+            "where id = #{literatur.ic}")
+    LiteraturModel ubahLiteratur(@Param("literatur") LiteraturModel literatur);
+
     @Select("select * from literatur where judul = #{judul}")
     LiteraturModel selectLiteraturByJudul(@Param("judul") String judul);
 
