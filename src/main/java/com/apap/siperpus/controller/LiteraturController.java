@@ -1,5 +1,10 @@
 package com.apap.siperpus.controller;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.service.LiteraturService;
 import org.json.JSONArray;
@@ -9,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import com.apap.siperpus.model.LiteraturModel;
+import com.apap.siperpus.service.LiteraturService;
 
 /**
  * Created on : April 24, 2018
@@ -18,8 +25,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/literatur")
 public class LiteraturController {
-    @Autowired
-    LiteraturService literaturDAO;
+	@Autowired
+	LiteraturService literaturDAO;
+    
+    @RequestMapping("/viewall")
+    public String lihatDaftarLiteratur(Model model) {
+    		List<LiteraturModel> literaturs = literaturDAO.selectAllLiteratur();
+        model.addAttribute ("literaturs", literaturs);
+        return "Literatur/daftarLiteratur";
+    }
 
     @RequestMapping("/tambah")
     public String tambah() {
@@ -49,6 +63,6 @@ public class LiteraturController {
     @RequestMapping("/delete/{id}")
     public String deleteLiteratur(@PathVariable(value = "id") int id){
         literaturDAO.deleteLiteratur(id);
-        return "Literatur/daftarLiteratur";
+        return "redirect:/literatur/viewall";
     }
 }
