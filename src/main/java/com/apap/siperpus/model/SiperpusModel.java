@@ -1,4 +1,4 @@
-package com.apap.model;
+package com.apap.siperpus.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

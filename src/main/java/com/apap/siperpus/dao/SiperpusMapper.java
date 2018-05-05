@@ -1,8 +1,8 @@
-package com.apap.dao;
+package com.apap.siperpus.dao;
 
 import java.util.List;
 
-import com.apap.model.SiperpusModel;
+import com.apap.siperpus.model.SiperpusModel;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

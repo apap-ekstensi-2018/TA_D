@@ -8,7 +8,7 @@
     <div class="wrapper">
         <div th:replace="fragments/fragment :: header"></div>
         <div th:replace="fragments/fragment :: sidebar"></div>
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color: white;">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -22,86 +22,54 @@
 
             <!-- Main content -->
             <section class="content">
-                <form action="/mahasiswa/tambah/submit" method="post" id="formAdd">
-                    <div class="form-control">
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Nama Lengkap</strong>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="/literatur/tambah" method="post" id="form">
+                            <div class='form-group'>
+                                <label >Judul</label>
+                                <p>
+                                    <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul'>
+                                </p>
                             </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="nama" name="nama" required="required" />
+                            <div class='form-group'>
+                                <label >Penulis</label>
+                                <p>
+                                    <input type='text' value='' class='form-control input-sm' name='penulis' required placeholder='Penulis'>
+                                </p>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Tempat Lahir</strong>
+                            <div class='form-group'>
+                                <label >Penerbit</label>
+                                <p>
+                                    <input type='text' value='' class='form-control input-sm' name='penerbit' required placeholder='Penerbit'>
+                                </p>
                             </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" required="required" />
+                            <div class='form-group'>
+                                <label >Jenis Literatur</label>
+                                <p>
+                                    <select name="jenis_literatur" class="form-control input-sm" required>
+                                        <option value="">-- Pilih --</option>
+                                        <option value="Jurnal">Jurnal</option>
+                                        <option value="Buku Referensi">Buku Referensi</option>
+                                        <option value="Publikasi">Publikasi</option>
+                                        <option value="Tugas Akhir">Tugas Akhir</option>
+                                        <option value="Skripsi">Skripsi</option>
+                                        <option value="Tesis">Tesis</option>
+                                        <option value="Disertasi">Disertasi</option>
+                                    </select>
+                                </p>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Tanggal Lahir</strong>
+                            <div class='form-group'>
+                                <label >Jumlah</label>
+                                <p>
+                                    <input type='number' value='' class='form-control input-sm' name='jumlah' required placeholder='Jumlah'>
+                                </p>
                             </div>
-                            <div class="col-md-4" id="tgllahir_parent">
-                                <input type="text" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required="required"/>
+                            <div>
+                                <button type="button" id="action" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Jenis Kelamin</strong>
-                            </div>
-                            <div class="col-md-4" id="jenkel_parent">
-                                <select id="jenis_kelamin" name="jenis_kelamin" ></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Agama</strong>
-                            </div>
-                            <div class="col-md-4" id="agama_parent">
-                                <select name="agama" id="agama"></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Golongan Darah</strong>
-                            </div>
-                            <div class="col-md-4" id="goldar_parent">
-                                <select name="golongan_darah" id="golongan_darah" ></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Tahun Masuk</strong>
-                            </div>
-                            <div class="col-md-4" id="thnmsk_parent">
-                                <input type="text" class="form-control" name="tahun_masuk" id="tahun_masuk" required="required"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Jalur Masuk</strong>
-                            </div>
-                            <div class="col-md-4" id="jamas_parent">
-                                <select name="jalur_masuk" id="jalur_masuk"></select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <strong>Program Studi</strong>
-                            </div>
-                            <div class="col-md-4" id="prodi_parent">
-                                <select name="id_prodi" id="id_prodi"></select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit" name="action" value="save" class="btn btn-default">Simpan</button>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </section>
             <!-- /.content -->
         </div>
@@ -109,6 +77,69 @@
 
         <div th:replace="fragments/fragment :: footer"></div>
         <div th:replace="fragments/fragment :: javascript"></div>
+
+        <div class="modal modal-danger fade" id="modal-gagal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Gagal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Literatur sudah ada !</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal modal-success fade" id="modal-berhasil">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Berhasil</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Literatur berhasil ditambahkan !</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
 </body>
+<script>
+    $("#action").click(function () {
+        var form = $("#form");
+        var result = form.valid();
+        $("label.error").css('color','red');
+        if(result){
+            $.ajax({
+                url:'/literatur/tambah',
+                method:'post',
+                data:{data:JSON.stringify(form.serializeArray())},
+                dataType:'json',
+                success: function (resp) {
+                    if(resp){
+                        $("#modal-berhasil").modal("show");
+                    }else{
+                        $("#modal-gagal").modal("show");
+                    }
+                },
+                error: function(e){ alert ("Error " + e); }
+            });
+        }
+    });
+</script>
 </html>
