@@ -10,7 +10,11 @@ import java.util.List;
  * Name       : Hendi
  */
 public interface LiteraturService {
+
+
     List<LiteraturModel> selectAllLiteratur ();
+
+    LiteraturModel selectLiteratur(int id);
 
     void ubahLiteratur (LiteraturModel literatur);
 
