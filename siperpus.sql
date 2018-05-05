@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 17 Apr 2018 pada 21.16
+-- Waktu pembuatan: 05 Bulan Mei 2018 pada 16.16
 -- Versi server: 10.1.30-MariaDB
 -- Versi PHP: 5.6.33
 
@@ -35,8 +35,16 @@ CREATE TABLE `literatur` (
   `penerbit` varchar(25) NOT NULL,
   `jenis_literatur` enum('Jurnal','Buku Referensi','Publikasi','Tugas Akhir','Skripsi','Tesis','Disertasi') NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `literatur`
+--
+
+INSERT INTO `literatur` (`id`, `judul`, `penulis`, `penerbit`, `jenis_literatur`, `jumlah`, `status`) VALUES
+(2, 'Riyadhus shalihin', 'Imam Nawawi', 'Erlangga', 'Buku Referensi', 10, 1),
+(3, 'Best apps in the world', 'Hendi', 'Erlangga', 'Publikasi', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -86,64 +94,64 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`username`, `password`, `role`) VALUES
-('1290578781', 'password', 'dosen'),
-('1290578783', 'password', 'dosen'),
-('1290578785', 'password', 'dosen'),
-('1290578787', 'password', 'dosen'),
-('1290578789', 'password', 'dosen'),
-('1290578791', 'password', 'dosen'),
-('1290578793', 'password', 'dosen'),
-('1290578795', 'password', 'dosen'),
-('1290578797', 'password', 'dosen'),
-('1290578799', 'password', 'dosen'),
-('1290578801', 'password', 'dosen'),
-('1290578803', 'password', 'dosen'),
-('1290578805', 'password', 'dosen'),
-('1290578807', 'password', 'dosen'),
-('1290578809', 'password', 'dosen'),
-('1290578811', 'password', 'dosen'),
-('1290578813', 'password', 'dosen'),
-('1290578815', 'password', 'dosen'),
-('1290578817', 'password', 'dosen'),
-('1290578819', 'password', 'dosen'),
-('1290578821', 'password', 'dosen'),
-('1290578823', 'password', 'dosen'),
-('1290578825', 'password', 'dosen'),
-('1290578827', 'password', 'dosen'),
-('1290578829', 'password', 'dosen'),
-('1290578831', 'password', 'dosen'),
-('1290578833', 'password', 'dosen'),
-('1290578835', 'password', 'dosen'),
-('1290578837', 'password', 'dosen'),
-('1290578839', 'password', 'dosen'),
-('1290578841', 'password', 'dosen'),
-('1290578843', 'password', 'dosen'),
-('1290578845', 'password', 'dosen'),
-('1290578897', 'password', 'dosen'),
-('1406575815', 'password', 'staf'),
-('1506689692', 'password', 'staf'),
-('1506721756', 'password', 'mahasiswa'),
-('1506721762', 'password', 'mahasiswa'),
-('1506721775', 'password', 'mahasiswa'),
-('1506721781', 'password', 'mahasiswa'),
-('1506721794', 'password', 'mahasiswa'),
-('1506721806', 'password', 'mahasiswa'),
-('1506721812', 'password', 'mahasiswa'),
-('1506721825', 'password', 'mahasiswa'),
-('1506721831', 'password', 'mahasiswa'),
-('1506721844', 'password', 'mahasiswa'),
-('1506721863', 'password', 'mahasiswa'),
-('1506721876', 'password', 'mahasiswa'),
-('1506721882', 'password', 'mahasiswa'),
-('1506721895', 'password', 'mahasiswa'),
-('1506721900', 'password', 'mahasiswa'),
-('1506723231', 'password', 'staf'),
-('1506737823', 'password', 'staf'),
-('1506757642', 'password', 'mahasiswa'),
-('1506757655', 'password', 'mahasiswa'),
-('1506757661', 'password', 'mahasiswa'),
-('1506757680', 'password', 'mahasiswa'),
-('1506757693', 'password', 'mahasiswa');
+('1290578781', 'password', 'ROLE_DOSEN'),
+('1290578783', 'password', 'ROLE_DOSEN'),
+('1290578785', 'password', 'ROLE_DOSEN'),
+('1290578787', 'password', 'ROLE_DOSEN'),
+('1290578789', 'password', 'ROLE_DOSEN'),
+('1290578791', 'password', 'ROLE_DOSEN'),
+('1290578793', 'password', 'ROLE_DOSEN'),
+('1290578795', 'password', 'ROLE_DOSEN'),
+('1290578797', 'password', 'ROLE_DOSEN'),
+('1290578799', 'password', 'ROLE_DOSEN'),
+('1290578801', 'password', 'ROLE_DOSEN'),
+('1290578803', 'password', 'ROLE_DOSEN'),
+('1290578805', 'password', 'ROLE_DOSEN'),
+('1290578807', 'password', 'ROLE_DOSEN'),
+('1290578809', 'password', 'ROLE_DOSEN'),
+('1290578811', 'password', 'ROLE_DOSEN'),
+('1290578813', 'password', 'ROLE_DOSEN'),
+('1290578815', 'password', 'ROLE_DOSEN'),
+('1290578817', 'password', 'ROLE_DOSEN'),
+('1290578819', 'password', 'ROLE_DOSEN'),
+('1290578821', 'password', 'ROLE_DOSEN'),
+('1290578823', 'password', 'ROLE_DOSEN'),
+('1290578825', 'password', 'ROLE_DOSEN'),
+('1290578827', 'password', 'ROLE_DOSEN'),
+('1290578829', 'password', 'ROLE_DOSEN'),
+('1290578831', 'password', 'ROLE_DOSEN'),
+('1290578833', 'password', 'ROLE_DOSEN'),
+('1290578835', 'password', 'ROLE_DOSEN'),
+('1290578837', 'password', 'ROLE_DOSEN'),
+('1290578839', 'password', 'ROLE_DOSEN'),
+('1290578841', 'password', 'ROLE_DOSEN'),
+('1290578843', 'password', 'ROLE_DOSEN'),
+('1290578845', 'password', 'ROLE_DOSEN'),
+('1290578897', 'password', 'ROLE_DOSEN'),
+('1406575815', 'password', 'ROLE_STAF'),
+('1506689692', 'password', 'ROLE_STAF'),
+('1506721756', 'password', 'ROLE_MAHASISWA'),
+('1506721762', 'password', 'ROLE_MAHASISWA'),
+('1506721775', 'password', 'ROLE_MAHASISWA'),
+('1506721781', 'password', 'ROLE_MAHASISWA'),
+('1506721794', 'password', 'ROLE_MAHASISWA'),
+('1506721806', 'password', 'ROLE_MAHASISWA'),
+('1506721812', 'password', 'ROLE_MAHASISWA'),
+('1506721825', 'password', 'ROLE_MAHASISWA'),
+('1506721831', 'password', 'ROLE_MAHASISWA'),
+('1506721844', 'password', 'ROLE_MAHASISWA'),
+('1506721863', 'password', 'ROLE_MAHASISWA'),
+('1506721876', 'password', 'ROLE_MAHASISWA'),
+('1506721882', 'password', 'ROLE_MAHASISWA'),
+('1506721895', 'password', 'ROLE_MAHASISWA'),
+('1506721900', 'password', 'ROLE_MAHASISWA'),
+('1506723231', 'password', 'ROLE_STAF'),
+('1506737823', 'password', 'ROLE_STAF'),
+('1506757642', 'password', 'ROLE_MAHASISWA'),
+('1506757655', 'password', 'ROLE_MAHASISWA'),
+('1506757661', 'password', 'ROLE_MAHASISWA'),
+('1506757680', 'password', 'ROLE_MAHASISWA'),
+('1506757693', 'password', 'ROLE_MAHASISWA');
 
 --
 -- Indexes for dumped tables
@@ -184,7 +192,7 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT untuk tabel `literatur`
 --
 ALTER TABLE `literatur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `peminjaman_literatur`
