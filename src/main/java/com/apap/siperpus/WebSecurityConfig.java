@@ -18,8 +18,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String ROLE_STAFF = "STAF";
-	private static final String ROLE_MAHASISWA = "mahasiswa";
-	private static final String ROLE_DOSEN = "dosen";
+	private static final String ROLE_MAHASISWA = "MAHASISWA";
+	private static final String ROLE_DOSEN = "DOSEN";
 	
 	@Autowired
 	DataSource dataSource;
@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/","/resources/**").permitAll()
-		.antMatchers("/literatur/tambah").hasRole(ROLE_STAFF)
+		.antMatchers("/literatur/tambah","/literatur/delete/**").hasRole(ROLE_STAFF)
 		.antMatchers("/**").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA)
 		.anyRequest().authenticated()
 		.and()

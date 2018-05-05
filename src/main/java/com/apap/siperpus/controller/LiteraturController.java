@@ -16,16 +16,17 @@ import org.springframework.web.bind.annotation.*;
  * Name       : Hendi
  */
 @Controller
+@RequestMapping("/literatur")
 public class LiteraturController {
     @Autowired
     LiteraturService literaturDAO;
 
-    @RequestMapping("/literatur/tambah")
+    @RequestMapping("/tambah")
     public String tambah() {
         return "Literatur/tambahliteratur";
     }
 
-    @RequestMapping(value = "/literatur/tambah", method = RequestMethod.POST)
+    @RequestMapping(value = "/tambah", method = RequestMethod.POST)
     public @ResponseBody boolean submitLiteratur(Model model, @ModelAttribute("data") String data){
         try {
         	JSONArray dataArray = new JSONArray(data);
@@ -43,5 +44,11 @@ public class LiteraturController {
 			// TODO: handle exception
 		}
     	return false;
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteLiteratur(@PathVariable(value = "id") int id){
+        literaturDAO.deleteLiteratur(id);
+        return "Literatur/daftarLiteratur";
     }
 }

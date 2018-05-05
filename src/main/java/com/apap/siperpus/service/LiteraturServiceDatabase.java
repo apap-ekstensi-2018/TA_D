@@ -36,4 +36,10 @@ public class LiteraturServiceDatabase implements LiteraturService {
         log.info("Insert literatur judul "+judul);
         literaturMapper.insertLiteratur(judul, penulis, penerbit, jenis_literatur, jumlah);
     }
+
+    @Override
+    public void deleteLiteratur(int id){
+        log.info("Delete literatur with id "+id);
+        literaturMapper.deleteLiteratur(id);
+    }
 }
