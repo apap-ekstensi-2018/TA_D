@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PeminjamanLiteraturModel {
 	private int id;
-	private int idLiteratur;
-	private String usernamePeminjam;
-	private String tanggalPeminjaman;
-	private String tanggalPengembalian;
-	private String statusPeminjaman;
-	private String idSurat;
+	private int id_literatur;
+	private String username_peminjaman;
+	private String tanggal_peminjaman;
+	private String tanggal_pengembalian;
+	private String status_peminjaman;
+	private String id_surat;
 }

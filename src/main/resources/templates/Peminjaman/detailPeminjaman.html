@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Detail Peminjaman Literatur</title>
+    <div th:replace="fragments/fragment :: head"></div>
 </head>
-<body>
-$END$
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragments/fragment :: header"></div>
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Detail Peminjaman Literatur
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
+                <li class="active">Detail Peminjaman Literatur</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <h2 th:text="'id:'  + ${peminjamanLiteratur.id}">Literatur ID</h2>
+            <h2 th:text="'id literatur:'  + ${peminjamanLiteratur.id_literatur}">id literatur</h2>
+            <h2 th:text="'username peminjaman:'  + ${peminjamanLiteratur.username_peminjaman}">username peminjaman</h2>
+            <h2 th:text="'tanggal peminjaman:'  + ${peminjamanLiteratur.tanggal_peminjaman}">tanggal peminjaman</h2>
+            <h2 th:text="'tanggal pengembalian:'  + ${peminjamanLiteratur.tanggal_pengembalian}">tanggal pengembalian</h2>
+            <h2 th:text="'status peminjaman:'  + ${peminjamanLiteratur.status_peminjaman}">status peminjaman</h2>
+            <h2 th:text="'id surat:'  + ${peminjamanLiteratur.id_surat}">id surat</h2>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div th:replace="fragments/fragment :: footer"></div>
+    <div th:replace="fragments/fragment :: javascript"></div>
+</div>
 </body>
 </html>
