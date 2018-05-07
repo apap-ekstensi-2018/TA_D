@@ -89,4 +89,9 @@ public class LiteraturController {
     public String uploadKaryaTulis() {
     	return "Literatur/uploadKaryaTulis";
     }
+
+    @RequestMapping("/cari")
+    public String cariLiteratur() {
+        return "Literatur/cariLiteratur";
+    }
 }
