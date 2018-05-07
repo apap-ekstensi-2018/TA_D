@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ubah Literatur</title>
+    <div th:replace="fragments/fragment :: head"></div>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragments/fragment :: header"></div>
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Ubah Literatur
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
+                <li class="active">Ubah Literatur</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <form action="/literatur/ubah/submit" method="post" th:object="${literatur}">
+                <div class="form-control">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>ID</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="id" name="id" th:value="${literatur.id}" th:field="*{id}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>Judul</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="judul" name="judul" th:value="${literatur.judul}" th:field="*{judul}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>Penulis</strong>
+                        </div>
+                        <div class="col-md-4" id="tgllahir_parent">
+                            <input type="text" class="form-control" name="penulis" id="penulis" th:value="${literatur.penulis}" th:field="*{penulis}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>Penerbit</strong>
+                        </div>
+                        <div class="col-md-4" id="jenkel_parent">
+                            <input type="text" class="form-control" id="penerbit" name="penerbit"  th:value="${literatur.penerbit}" th:field="*{penerbit}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>Jenis Literatur</strong>
+                        </div>
+                        <div class="col-md-4" id="agama_parent">
+                            <input type="text" class="form-control" name="jenis_literatur" id="jenis_literatur" th:value="${literatur.jenis_literatur}" th:field="*{jenis_literatur}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>Jumlah</strong>
+                        </div>
+                        <div class="col-md-4" id="goldar_parent">
+                            <input type="text" class="form-control" name="jumlah" id="jumlah" th:value="${literatur.jumlah}" th:field="*{jumlah}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <strong>Status</strong>
+                        </div>
+                        <div class="col-md-4" id="thnmsk_parent">
+                            <input type="text" class="form-control" name="status" id="status" th:value="${literatur.status}" th:field="*{status}" />
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" name="action" value="save" class="btn btn-default">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div th:replace="fragments/fragment :: footer"></div>
+    <div th:replace="fragments/fragment :: javascript"></div>
+</div>
+</body>
+</html>

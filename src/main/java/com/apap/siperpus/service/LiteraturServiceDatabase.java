@@ -16,6 +16,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class LiteraturServiceDatabase implements LiteraturService {
+
     @Autowired
     private LiteraturMapper literaturMapper;
 
@@ -26,6 +27,19 @@ public class LiteraturServiceDatabase implements LiteraturService {
     }
 
     @Override
+    public LiteraturModel selectLiteratur(int id)
+    {
+        log.info ("select literatur with id {}", id);
+        return literaturMapper.selectLiteratur (id);
+    }
+
+    @Override
+    public void ubahLiteratur(LiteraturModel literatur)
+    {
+        log.info("literatur"+literatur.getId());
+        literaturMapper.ubahLiteratur(literatur);
+    }
+
     public LiteraturModel selectLiteraturByJudul(String judul){
         log.info("Select literatur by judul "+judul);
         return literaturMapper.selectLiteraturByJudul(judul);

@@ -48,10 +48,10 @@
 				         <td th:text= "${literatur.jumlah}"></td>
 				         <td th:text= "${literatur.status} ? 'Aktif' : 'Non Aktif'"></td>
 				         <td >
-				         	<a class="btn btn-success btn-xs ad-click-event" >	
+				         	<a th:href="'/literatur/view/'+${literatur.id }" class="btn btn-success btn-xs ad-click-event" >
 				         		<i class="fa fa-share" aria-hidden="true"></i>
                              </a>
-                             <a class="btn btn-warning btn-xs ad-click-event">
+                             <a th:href="'/literatur/ubah/'+${literatur.id }" class="btn btn-warning btn-xs ad-click-event">
                              	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                              </a>
                              <a class="btn btn-danger btn-xs ad-click-event" data-toggle="modal" th:attr="data-target='#modal-delete'+${literatur.id }">
@@ -90,7 +90,9 @@
 				 </div>
 				 <!-- /.box-body -->
 				 <!-- /.box-footer -->
-				</div>
+				 <div class="pull-right">
+				 	<a href="/literatur/tambah" class="btn btn-default">Tambah data</a>
+				 </div>
 				<!-- /.box -->
             </section>
             <!-- /.content -->

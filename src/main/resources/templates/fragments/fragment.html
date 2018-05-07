@@ -85,9 +85,9 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="active treeview">
-                        <a href="/literatur/tambah">
-                            <i class="fa fa-book"></i> <span>Menambah Literatur</span>
+                    <li class="active treeview" th:if="${#httpServletRequest.isUserInRole('STAF')}" >
+                        <a href="/literatur/viewall">
+                            <i class="fa fa-book"></i> <span>Lihat semua literatur</span>
                         </a>
                     </li>
                     <li class="active treeview">
@@ -101,7 +101,7 @@
                         </a>
                     </li>
                     <li class="active treeview">
-                        <a href="#">
+                        <a href="/literatur/upload">
                             <i class="fa fa-file-text"></i> <span>Karya Tulis</span>
                         </a>
                     </li>
