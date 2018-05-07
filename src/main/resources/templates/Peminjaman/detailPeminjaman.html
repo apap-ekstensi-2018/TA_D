@@ -23,13 +23,56 @@
 
         <!-- Main content -->
         <section class="content">
-            <h2 th:text="'id:'  + ${peminjamanLiteratur.id}">Literatur ID</h2>
-            <h2 th:text="'id literatur:'  + ${peminjamanLiteratur.id_literatur}">id literatur</h2>
-            <h2 th:text="'username peminjaman:'  + ${peminjamanLiteratur.username_peminjaman}">username peminjaman</h2>
-            <h2 th:text="'tanggal peminjaman:'  + ${peminjamanLiteratur.tanggal_peminjaman}">tanggal peminjaman</h2>
-            <h2 th:text="'tanggal pengembalian:'  + ${peminjamanLiteratur.tanggal_pengembalian}">tanggal pengembalian</h2>
-            <h2 th:text="'status peminjaman:'  + ${peminjamanLiteratur.status_peminjaman}">status peminjaman</h2>
-            <h2 th:text="'id surat:'  + ${peminjamanLiteratur.id_surat}">id surat</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>1</th>
+                                    <th>id</th>
+                                    <td th:text="${peminjamanLiteratur.id}"></td>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                    <th>id literatur</th>
+                                    <td th:text="${peminjamanLiteratur.id_literatur}"></td>
+                                </tr>
+                                <tr>
+                                    <th>3</th>
+                                    <th>judul literatur</th>
+                                    <td th:text="${judul_literatur}"></td>
+                                </tr>
+                                <tr>
+                                    <th>4</th>
+                                    <th>username</th>
+                                    <td th:text="${peminjamanLiteratur.username_peminjaman}"></td>
+                                </tr>
+                                <tr>
+                                    <th>5</th>
+                                    <th>tanggal peminjaman</th>
+                                    <td th:text="${tanggal_masuk}"></td>
+                                </tr>
+                                <tr>
+                                    <th>6</th>
+                                    <th>tanggal pengembalian</th>
+                                    <td th:text="${tanggal_keluar}"></td>
+                                </tr>
+                                <tr>
+                                    <th>7</th>
+                                    <th>status peminjaman</th>
+                                    <td th:text="${peminjamanLiteratur.status_peminjaman}"></td>
+                                </tr>
+                                <tr>
+                                    <th>8</th>
+                                    <th>id surat</th>
+                                    <td th:text="${peminjamanLiteratur.id_surat}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
