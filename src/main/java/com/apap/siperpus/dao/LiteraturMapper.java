@@ -1,6 +1,8 @@
 package com.apap.siperpus.dao;
 
 import com.apap.siperpus.model.LiteraturModel;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,14 +17,14 @@ public interface LiteraturMapper {
     @Select("select * from literatur")
     List<LiteraturModel> selectAllLiteratur ();
 
-    @Update("Update student set judul = #{literatur.judul}," +
+    @Update("Update literatur set judul = #{literatur.judul}," +
             "penulis = #{literatur.penulis}," +
             "penerbit = #{literatur.penerbit}," +
             "jenis_literatur = #{literatur.jenis_literatur}," +
             "jumlah = #{literatur.jumlah}," +
             "status = #{literatur.status}" +
-            "where id = #{literatur.ic}")
-    LiteraturModel ubahLiteratur(@Param("literatur") LiteraturModel literatur);
+            " where id = #{literatur.id}")
+    void ubahLiteratur(@Param("literatur") LiteraturModel literatur);
 
     @Select("select * from literatur where judul = #{judul}")
     LiteraturModel selectLiteraturByJudul(@Param("judul") String judul);
@@ -34,4 +36,7 @@ public interface LiteraturMapper {
 
     @Delete("delete from literatur where id = #{id}")
     void deleteLiteratur(@Param("id") int id);
+
+    @Select("select * from literatur where id = #{id}")
+    LiteraturModel selectLiteratur(@Param("id") int id);
 }

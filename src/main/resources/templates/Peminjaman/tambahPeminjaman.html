@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Peminjaman</title>
+    <div th:replace="fragments/fragment :: head"></div>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragments/fragment :: header"></div>
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Detail Peminjaman Literatur
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
+                <li class="active">Detail Peminjaman Literatur</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/peminjaman/tambah" method="post" id="form">
+                        <div class='form-group'>
+                            <label>Literatur</label>
+                            <p>
+                                <select name="id_literatur" id="id_literatur"></select>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label>Username</label>
+                            <p>
+                                <input type='text' value='' class='form-control input-sm' name='username_peminjaman' required placeholder='Username'>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label>Tanggal Peminjaman</label>
+                            <p>
+                                <input type='date' value='' class='form-control input-sm' name='tanggal_peminjaman' required placeholder='Tanggal Peminjaman'>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label>Tanggal Pengembalian</label>
+                            <p>
+                                <input type='date' value='' class='form-control input-sm' name='tanggal_pengembalian' required placeholder='Tanggal Pengembalian'>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label>Status Peminjaman</label>
+                            <p>
+                                <select name="status_peminjaman" class="form-control input-sm" required>
+                                    <option value="">-- Pilih --</option>
+                                    <option value="Belum diproses">Belum diproses</option>
+                                    <option value="Disetujui">Disetujui</option>
+                                    <option value="Ditolak">Ditolak</option>
+                                    <option value="Sudah diambil">Sudah diambil</option>
+                                    <option value="Sudah dikembalikan">Sudah dikembalikan</option>
+                                    <option value="Belum dikembalikan">Belum dikembalikan</option>
+                                    <option value="Overdue">Overdue</option>
+                                </select>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label>Id Surat</label>
+                            <p>
+                                <input type='text' value='' class='form-control input-sm' name='id_surat' placeholder='surat'>
+                            </p>
+                        </div>
+                        <div>
+                            <button type="button" id="action" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div th:replace="fragments/fragment :: footer"></div>
+    <div th:replace="fragments/fragment :: javascript"></div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    load_dropdown_literatur();
+});
+
+function load_dropdown_literatur(){
+    $literatur = $("#id_literatur").selectize({
+            valueField: 'id',
+            labelField: 'judul',
+            searchField: 'judul',
+            create: false,
+            preload: true,
+            options: [],
+            load: function(query, callback){
+                $.ajax({
+                    url: "/peminjaman/select/literatur",
+                    type: "GET",
+                    error: function(){
+                        callback();
+                    },
+                    success: function(res){
+                        callback(res);
+                    }
+                })
+            },
+            onChange: function(e){
+                $("#prodi_parent").find("span").remove();
+            }
+        });
+    prodi = $prodi[0].selectize;
+}
+</script>

@@ -2,12 +2,7 @@ package com.apap.siperpus.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import com.apap.siperpus.model.PeminjamanLiteraturModel;
 
@@ -32,7 +27,7 @@ public interface PeminjamanLiteraturMapper {
 		@Result(property="tanggaPeminjaman", column="tanggal_peminjaman"),
 		@Result(property="tanggalPengembalian", column="tanggal_pengembalian"),
 		@Result(property="statusPeminjaman", column="status_peminjaman"),
-		@Result(property="idSurat", column="is_surat")
+		@Result(property="idSurat", column="id_surat")
 	})
 	List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur();
 	
@@ -49,9 +44,13 @@ public interface PeminjamanLiteraturMapper {
 	@Update("UPDATE peminjaman_literatur SET "
 			+ "id_literatur=#{idLiteratur},"
 			+ "username_peminjam=#{usernamePeminjam},"
-			+ "tanggal_peminjaman=#{tanggalPeminjaman}"
-			+ "tanggal_pengembalian=#{tanggalPengembalian}"
-			+ "status_peminjaman=#{statusPeminjaman}"
-			+ "id_surat=#{idSurat}")
+			+ "tanggal_peminjaman=#{tanggalPeminjaman}, "
+			+ "tanggal_pengembalian=#{tanggalPengembalian}, "
+			+ "status_peminjaman=#{statusPeminjaman}, "
+			+ "id_surat=#{idSurat} "
+			+ "where id =#{idPeminajamanLiteratur}")
 	void updatePeminjamanLiteraturByIdLiteratur(int idPeminajamanLiteratur);
+
+	@Select("SELECT * FROM peminjaman_literatur where id = #{id_literatur}")
+	PeminjamanLiteraturModel selectPeminjamanLiteraturById(@Param("id_literatur") String id_literatur);
 }
