@@ -1,7 +1,9 @@
 package com.apap.siperpus.service;
 
 import com.apap.siperpus.dao.LiteraturMapper;
+import com.apap.siperpus.dao.PeminjamanLiteraturMapper;
 import com.apap.siperpus.model.LiteraturModel;
+import com.apap.siperpus.model.PeminjamanLiteraturModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class LiteraturServiceDatabase implements LiteraturService {
     @Autowired
     private LiteraturMapper literaturMapper;
 
+    @Autowired
+    private PeminjamanLiteraturMapper peminjamanMapper;
+
     @Override
     public List<LiteraturModel> selectAllLiteratur(){
         log.info("Select all literatur");
@@ -30,6 +35,10 @@ public class LiteraturServiceDatabase implements LiteraturService {
     public LiteraturModel selectLiteratur(int id)
     {
         log.info ("select literatur with id {}", id);
+        LiteraturModel modelExist = literaturMapper.selectLiteratur (id);
+        // detil peminjaman select by literatur id
+        PeminjamanLiteraturModel peminjamanExist = peminjamanMapper.selectJumlahPeminjaman(id);
+        modelExist.setJumlah(modelExist.getJumlah()-peminjamanExist.getId());
         return literaturMapper.selectLiteratur (id);
     }
 

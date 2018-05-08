@@ -24,6 +24,13 @@ public interface PeminjamanLiteraturMapper {
 		@Result(property="idSurat", column="is_surat")
 	})
 	PeminjamanLiteraturModel selectPeminjamanLiteraturByIdLiteratur(int id);
+
+	@Select("SELECT count(*) as jumlah_peminjaman FROM peminjaman_literatur WHERE id=#{id}")
+	@Results({
+			@Result(property="idLiteratur", column="id_literatur"),
+			@Result(property="jumlahpeminjaman", column="jumlah_peminjaman")
+	})
+	PeminjamanLiteraturModel selectJumlahPeminjaman(int id);
 	
 	@Select("SELECT * FROM peminjaman_literatur")
 	@Results({

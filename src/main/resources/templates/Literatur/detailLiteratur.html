@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tambah Literatur</title>
@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <h2 th:text="'ID Literatur:'  + ${literatur.id}">Literatur ID</h2>
+            <h2 th:text="'ID Literatur:'  + ${literatur.id}" class="form-control" >Literatur ID</h2>
             <h2 th:text="'Judul:'  + ${literatur.judul}">Literatur Judul</h2>
             <h2 th:text="'Penulis:'  + ${literatur.penulis}">Literatur Penulis</h2>
             <h2 th:text="'Penerbit:'  + ${literatur.penerbit}">Literatur Penerbit</h2>
