@@ -2,6 +2,7 @@ package com.apap.siperpus.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -16,7 +17,7 @@ public interface PengadaanLiteraturMapper {
 	@Results({
 		@Result(property="usernameRequester", column="username_requester")
 	})
-	PengadaanLiteraturModel selectPengadaanLiteraturByUsername(String username);
+	List<PengadaanLiteraturModel> selectPengadaanLiteraturByUsernameRequester(String usernameRequester);
 	
 	@Select("SELECT * FROM pengadaan_literatur WHERE judul=#{judul}")
 	@Results({
@@ -29,4 +30,13 @@ public interface PengadaanLiteraturMapper {
 		@Result(property="usernameRequester", column="username_requester")
 	})
 	List<PengadaanLiteraturModel> selectAllPengadaanLiteratur();
+	
+	@Insert("INSERT INTO pengadaan_literatur VALUES ("
+			+ "#{usernameRequester},"
+			+ "#{judul},"
+			+ "#{penulis},"
+			+ "#{penerbit},"
+			+ "#{status}"
+			+ ")")
+	void insertPengadaanLiteratur(PengadaanLiteraturModel pengadaanLiteratur);
 }
