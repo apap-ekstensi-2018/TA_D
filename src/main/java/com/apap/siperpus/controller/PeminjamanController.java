@@ -4,10 +4,15 @@ import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.model.PeminjamanLiteraturModel;
 import com.apap.siperpus.service.LiteraturService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/peminjaman")
@@ -16,14 +21,28 @@ public class PeminjamanController {
     @Autowired
     LiteraturService literaturDAO;
 
+    @RequestMapping("/tambah")
+    public String tambahPeminjaman(Model model) {
+
+        return "Peminjaman/tambahPeminjaman";
+    }
+
     @RequestMapping("/view/{id_literatur}")
-    public String viewLiteratur(Model model, @PathVariable(value = "id_literatur") String id_literatur) {
+    public String viewPeminjaman(Model model, @PathVariable(value = "id_literatur") String id_literatur) {
         PeminjamanLiteraturModel peminjamanLiteratur = literaturDAO.selectPeminjamanLiteraturById(id_literatur);
         model.addAttribute("tanggal_masuk", formatTanggal(peminjamanLiteratur.getTanggal_peminjaman()));
         model.addAttribute("tanggal_keluar", formatTanggal(peminjamanLiteratur.getTanggal_pengembalian()));
         model.addAttribute("peminjamanLiteratur", peminjamanLiteratur);
         model.addAttribute("judul_literatur", selectJudulLiteraturById(peminjamanLiteratur.getId_literatur()));
         return "Peminjaman/detailPeminjaman";
+    }
+
+
+    @RequestMapping(value="/select/literatur", method= RequestMethod.GET)
+    public ResponseEntity<List<LiteraturModel>> selectLiteratur(Model model)
+    {
+        List<LiteraturModel> literaturModels = literaturDAO.selectAllLiteratur();
+        return new ResponseEntity<List<LiteraturModel>>(literaturModels, HttpStatus.OK);
     }
 
     public String selectJudulLiteraturById(int id)
