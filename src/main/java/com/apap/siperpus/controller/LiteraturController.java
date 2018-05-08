@@ -75,7 +75,7 @@ public class LiteraturController {
     }
     
     @RequestMapping("/upload")
-    public String uploadKaryaTulis(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    public String uploadKaryaTulis(@RequestParam("file") MultipartFile file, LiteraturModel literatur, RedirectAttributes redirectAttributes) {
     	if (!file.isEmpty()) {
     		try {	
 	    		byte[] bytes = file.getBytes();
