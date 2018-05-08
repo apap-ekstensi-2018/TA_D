@@ -24,27 +24,27 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/literatur/tambah" method="post" id="form">
+                        <form action="/literatur/tambah" method="post" id="form" th:object="${literatur}">
                             <div class='form-group'>
-                                <label >Judul</label>
+                                <label>Judul</label>
                                 <p>
                                     <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul'>
                                 </p>
                             </div>
                             <div class='form-group'>
-                                <label >Penulis</label>
+                                <label>Penulis</label>
                                 <p>
                                     <input type='text' value='' class='form-control input-sm' name='penulis' required placeholder='Penulis'>
                                 </p>
                             </div>
                             <div class='form-group'>
-                                <label >Pembimbing</label>
+                                <label>Pembimbing</label>
                                 <p>
                                     <input type='text' value='' class='form-control input-sm' name='pembimbing' required placeholder='Pembimbing'>
                                 </p>
                             </div>
                             <div class='form-group'>
-                                <label >Upload Dokumen</label>
+                                <label>Upload Dokumen</label>
                                 <p>
                                     <input type='file' value='' class='form-control input-sm' name='dokumen' accept="application/pdf" required placeholder='dokumen'>
                                 </p>
