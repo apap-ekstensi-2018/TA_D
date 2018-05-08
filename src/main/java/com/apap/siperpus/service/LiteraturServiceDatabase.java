@@ -23,7 +23,7 @@ public class LiteraturServiceDatabase implements LiteraturService {
     private LiteraturMapper literaturMapper;
 
     @Autowired
-    private PeminjamanLiteraturMapper peminjamanMapper;
+    private PeminjamanLiteraturMapper peminjamanLiteraturMapper;
 
     @Override
     public List<LiteraturModel> selectAllLiteratur(){
@@ -37,7 +37,7 @@ public class LiteraturServiceDatabase implements LiteraturService {
         log.info ("select literatur with id {}", id);
         LiteraturModel modelExist = literaturMapper.selectLiteratur (id);
         // detil peminjaman select by literatur id
-        PeminjamanLiteraturModel peminjamanExist = peminjamanMapper.selectJumlahPeminjaman(id);
+        PeminjamanLiteraturModel peminjamanExist = peminjamanLiteraturMapper.selectJumlahPeminjaman(id);
         modelExist.setJumlah(modelExist.getJumlah()-peminjamanExist.getId());
         return literaturMapper.selectLiteratur (id);
     }
@@ -64,5 +64,17 @@ public class LiteraturServiceDatabase implements LiteraturService {
     public void deleteLiteratur(int id){
         log.info("Delete literatur with id "+id);
         literaturMapper.deleteLiteratur(id);
+    }
+
+    @Override
+    public List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur(){
+        log.info("Select all literatur");
+        return peminjamanLiteraturMapper.selectAllPeminjamanLiteratur();
+    }
+
+    @Override
+    public PeminjamanLiteraturModel selectPeminjamanLiteraturById(String id_literatur){
+        log.info("select by literatur id" + id_literatur);
+        return peminjamanLiteraturMapper.selectPeminjamanLiteraturById(id_literatur);
     }
 }

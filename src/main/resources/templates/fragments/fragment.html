@@ -30,7 +30,7 @@
     <div th:fragment="header">
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a th:href="@{'/'}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>SI</b>P</span>
                 <!-- logo for regular state and mobile devices -->
@@ -91,7 +91,7 @@
                         </a>
                     </li>
                     <li class="active treeview">
-                        <a href="#">
+                        <a href="/peminjaman/tambah">
                             <i class="fa fa-list-alt"></i> <span>Peminjaman</span>
                         </a>
                     </li>
@@ -105,6 +105,7 @@
                             <i class="fa fa-file-text"></i> <span>Karya Tulis</span>
                         </a>
                     </li>
+                    
                 </ul>
             </section>
             <!-- /.sidebar -->
