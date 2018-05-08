@@ -39,4 +39,5 @@ public interface LiteraturMapper {
 
     @Select("select * from literatur where id = #{id}")
     LiteraturModel selectLiteratur(@Param("id") int id);
+
 }

@@ -26,8 +26,7 @@ public class LiteraturController {
     LiteraturService literaturDAO;
 
     @RequestMapping("/ubah/{id}")
-    public String ubahLiteratur (Model model, @PathVariable(value = "id") int id)
-    {
+    public String ubahLiteratur (Model model, @PathVariable(value = "id") int id) {
         System.out.println("ubah Literatur : " + id);
         LiteraturModel literatur = literaturDAO.selectLiteratur(id);
         model.addAttribute("literatur",literatur);
@@ -49,7 +48,7 @@ public class LiteraturController {
 
     @RequestMapping("/viewall")
     public String lihatDaftarLiteratur(Model model) {
-    		List<LiteraturModel> literaturs = literaturDAO.selectAllLiteratur();
+        List<LiteraturModel> literaturs = literaturDAO.selectAllLiteratur();
         model.addAttribute ("literaturs", literaturs);
         return "Literatur/daftarLiteratur";
     }
@@ -60,7 +59,7 @@ public class LiteraturController {
     }
 
     @RequestMapping(value = "/tambah", method = RequestMethod.POST)
-    public @ResponseBody boolean submitLiteratur(Model model, @ModelAttribute("data") String data){
+    public @ResponseBody boolean submitLiteratur(Model model, @ModelAttribute("data") String data) {
         try {
         	JSONArray dataArray = new JSONArray(data);
             LiteraturModel literatur = literaturDAO.selectLiteraturByJudul(dataArray.getJSONObject(0).getString("value"));
@@ -80,7 +79,7 @@ public class LiteraturController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteLiteratur(@PathVariable(value = "id") int id){
+    public String deleteLiteratur(@PathVariable(value = "id") int id) {
         literaturDAO.deleteLiteratur(id);
         return "redirect:/literatur/viewall";
     }
@@ -94,4 +93,5 @@ public class LiteraturController {
     public String cariLiteratur() {
         return "Literatur/cariLiteratur";
     }
+
 }

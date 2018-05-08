@@ -29,29 +29,29 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="/literatur/cari" method="post" id="form">
+                    <form action="/literatur/cari" method="get" id="form">
                         <div class='form-group'>
                             <label >Judul</label>
                             <p>
-                                <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul'>
+                                <input type='text' value='' class='form-control input-sm' name='judul' id="judul" placeholder='Judul'>
                             </p>
                         </div>
                         <div class='form-group'>
                             <label >Penulis</label>
                             <p>
-                                <input type='text' value='' class='form-control input-sm' name='penulis' required placeholder='Penulis'>
+                                <input type='text' value='' class='form-control input-sm' name='penulis' placeholder='Penulis'>
                             </p>
                         </div>
                         <div class='form-group'>
                             <label >Penerbit</label>
                             <p>
-                                <input type='text' value='' class='form-control input-sm' name='penerbit' required placeholder='Penerbit'>
+                                <input type='text' value='' class='form-control input-sm' name='penerbit' placeholder='Penerbit'>
                             </p>
                         </div>
                         <div class='form-group'>
                             <label >Jenis Literatur</label>
                             <p>
-                                <select name="jenis_literatur" class="form-control input-sm" required>
+                                <select name="jenis_literatur" class="form-control input-sm">
                                     <option value="">-- Pilih --</option>
                                     <option value="Jurnal">Jurnal</option>
                                     <option value="Buku Referensi">Buku Referensi</option>
