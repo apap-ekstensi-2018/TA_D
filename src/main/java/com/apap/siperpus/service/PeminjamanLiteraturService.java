@@ -6,9 +6,11 @@ import com.apap.siperpus.model.PeminjamanLiteraturModel;
 public interface PeminjamanLiteraturService {
 	List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur();
 	
-	PeminjamanLiteraturModel selectPeminjamanById(int id);
+	PeminjamanLiteraturModel selectPeminjamanLiteraturById(int id);
 	
 	void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur);
 
 	PeminjamanLiteraturModel selectJumlahPeminjaman(int id);
+
+	void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur);
 }

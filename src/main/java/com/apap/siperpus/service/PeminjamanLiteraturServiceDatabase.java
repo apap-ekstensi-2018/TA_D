@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturService {
+
 	@Autowired
 	private PeminjamanLiteraturMapper peminjamanLiteraturMapper;
 	
@@ -22,11 +23,11 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 		return obj;
 	}
 
-	@Override
-	public PeminjamanLiteraturModel selectPeminjamanById(int id) {
-		PeminjamanLiteraturModel obj = peminjamanLiteraturMapper.selectPeminjamanLiteraturByIdLiteratur(id);
-		return obj;
+	public PeminjamanLiteraturModel selectPeminjamanLiteraturById(int id) {
+		log.info("Peminjaman Literatur {}", id);
+		return peminjamanLiteraturMapper.selectPeminjamanLiteraturByIdLiteratur(id);
 	}
+
 
 	@Override
 	public void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur) {
@@ -37,5 +38,10 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 	public PeminjamanLiteraturModel selectJumlahPeminjaman(int id) {
 		PeminjamanLiteraturModel obj = peminjamanLiteraturMapper.selectJumlahPeminjaman(id);
 		return obj;
+	}
+
+	@Override
+	public void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur){
+		peminjamanLiteraturMapper.ubahPeminjaman(peminjamanLiteratur);
 	}
 }

@@ -15,5 +15,5 @@ public class PeminjamanLiteraturModel {
 	private String tanggal_pengembalian;
 	private String status_peminjaman;
 	private String id_surat;
-	private int jumlah_peminjaman;
+	private int jumlahpeminjaman;
 }

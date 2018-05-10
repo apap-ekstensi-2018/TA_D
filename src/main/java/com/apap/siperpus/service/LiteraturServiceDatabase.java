@@ -38,7 +38,7 @@ public class LiteraturServiceDatabase implements LiteraturService {
         LiteraturModel modelExist = literaturMapper.selectLiteratur (id);
         // detil peminjaman select by literatur id
         PeminjamanLiteraturModel peminjamanExist = peminjamanLiteraturMapper.selectJumlahPeminjaman(id);
-        modelExist.setJumlah(modelExist.getJumlah()-peminjamanExist.getJumlah_peminjaman());
+        modelExist.setJumlah(modelExist.getJumlah()-peminjamanExist.getJumlahpeminjaman());
         return literaturMapper.selectLiteratur (id);
     }
 
