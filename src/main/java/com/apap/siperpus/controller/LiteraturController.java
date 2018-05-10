@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.service.LiteraturService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.json.JSONArray;
@@ -118,8 +115,27 @@ public class LiteraturController {
 		return "Literatur/uploadKaryaTulis";
 	}
 
-	/*
-	 * @RequestMapping("/upload/submit") public String submitKaryaTulis(@Para) {
-	 * return ""; }
-	 */
+    @RequestMapping("/cari/")
+    public String cariLiteratur() {
+        return "Literatur/cariLiteratur";
+    }
+
+    @RequestMapping("/cari")
+    public String submitCari(Model model, @RequestParam("judul") String judul, @RequestParam("penulis") String penulis, @RequestParam("penerbit") String penerbit,  @RequestParam("jenis_literatur") String jenis_literatur) {
+        Set<LiteraturModel> literaturs = new HashSet<>();
+        if(judul != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionTitle(judul));
+        }
+        if(penulis != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionAuthor(penulis));
+        }
+        if(penerbit != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionPublisher(penerbit));
+        }
+        if(jenis_literatur != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionTypeOfLiteature(jenis_literatur));
+        }
+        model.addAttribute ("literaturs", literaturs);
+        return "Literatur/daftarLiteratur";
+    }
 }

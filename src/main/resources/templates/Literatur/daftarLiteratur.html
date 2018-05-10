@@ -24,75 +24,77 @@
             <section class="content">
             		<!-- TABLE: LATEST ORDERS -->
 				<div class="box box-info">
-				  <!-- /.box-header -->
-				 <div class="box-body">
-				   <div class="table-responsive">
-				     <table class="table no-margin">
-				       <thead>
-				       <tr>
-				         <th>Judul</th>
-				         <th>Penulis</th>
-				         <th>Penerbit</th>
-				         <th>Jenis Literatur</th>
-				         <th>Jumlah</th>
-				         <th>Status</th>
-				         <th>Aksi</th>
-				       </tr>
-				       </thead>
-				       <tbody>
-				       <tr th:each = "literatur,iterationStatus: ${literaturs}">
-				       	 <td th:text= "${literatur.judul}"></td>
-				         <td th:text= "${literatur.penulis}"></td>
-				         <td th:text= "${literatur.penerbit}"></td>
-				         <td th:text= "${literatur.jenis_literatur}"></td>
-				         <td th:text= "${literatur.jumlah}"></td>
-				         <td th:text= "${literatur.status} ? 'Aktif' : 'Non Aktif'"></td>
-				         <td >
-				         	<a th:href="'/literatur/view/'+${literatur.id }" class="btn btn-success btn-xs ad-click-event" >
-				         		<i class="fa fa-share" aria-hidden="true"></i>
-                             </a>
-                             <a th:href="'/literatur/ubah/'+${literatur.id }" class="btn btn-warning btn-xs ad-click-event">
-                             	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                             </a>
-                             <a class="btn btn-danger btn-xs ad-click-event" data-toggle="modal" th:attr="data-target='#modal-delete'+${literatur.id }">
-                              	<i class="fa fa-times" aria-hidden="true"></i>
-                             </a>
-                             
-                             <div class="modal modal-danger fade" th:attr="id='modal-delete'+${literatur.id }">
-					          <div class="modal-dialog">
-					            <div class="modal-content">
-					              <div class="modal-header">
-					                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					                  <span aria-hidden="true">&times;</span></button>
-					                <h4 class="modal-title">Delete</h4>
-					              </div>
-					              <div class="modal-body">
-					                <p>Are you sure? </p>
-					                <p>Do you want to delete this?&hellip;</p>
-					              </div>
-					              <div class="modal-footer">
-					                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-					                <a type="button" th:href="'/literatur/delete/'+${literatur.id }" class="btn btn-danger">Delete</a>
-					              </div>
-					            </div>
-					            <!-- /.modal-content -->
-					          </div>
-					          <!-- /.modal-dialog -->
-					        </div>
-					        <!-- /.modal -->
-					        
-				         </td>
-				       </tr>
-				       </tbody>
-				     </table>
-				   </div>
-				   <!-- /.table-responsive -->
-				 </div>
-				 <!-- /.box-body -->
-				 <!-- /.box-footer -->
-				 <div class="pull-right">
-				 	<a href="/literatur/tambah" class="btn btn-default">Tambah data</a>
-				 </div>
+				  	<!-- /.box-header -->
+					 <div class="box-body">
+					   <div class="table-responsive">
+						 <table class="table no-margin">
+						   <thead>
+						   <tr>
+							 <th>Judul</th>
+							 <th>Penulis</th>
+							 <th>Penerbit</th>
+							 <th>Jenis Literatur</th>
+							 <th>Jumlah</th>
+							 <th>Status</th>
+							 <th>Aksi</th>
+						   </tr>
+						   </thead>
+						   <tbody>
+						   <tr th:each = "literatur,iterationStatus: ${literaturs}">
+							 <td th:text= "${literatur.judul}"></td>
+							 <td th:text= "${literatur.penulis}"></td>
+							 <td th:text= "${literatur.penerbit}"></td>
+							 <td th:text= "${literatur.jenis_literatur}"></td>
+							 <td th:text= "${literatur.jumlah}"></td>
+							 <td th:text= "${literatur.status} ? 'Aktif' : 'Non Aktif'"></td>
+							 <td >
+								<a th:href="'/literatur/view/'+${literatur.id }" class="btn btn-info btn-xs ad-click-event" >
+									<i class="fa fa-share" aria-hidden="true"></i>
+								 </a>
+								 <a th:href="'/literatur/ubah/'+${literatur.id }" class="btn btn-warning btn-xs ad-click-event">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+								 </a>
+								 <a class="btn btn-danger btn-xs ad-click-event" data-toggle="modal" th:attr="data-target='#modal-delete'+${literatur.id }">
+									<i class="fa fa-times" aria-hidden="true"></i>
+								 </a>
+
+								 <div class="modal modal-danger fade" th:attr="id='modal-delete'+${literatur.id }">
+								  <div class="modal-dialog">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title">Delete</h4>
+									  </div>
+									  <div class="modal-body">
+										<p>Are you sure? </p>
+										<p>Do you want to delete this?&hellip;</p>
+									  </div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+										<a type="button" th:href="'/literatur/delete/'+${literatur.id }" class="btn btn-danger">Delete</a>
+									  </div>
+									</div>
+									<!-- /.modal-content -->
+								  </div>
+								  <!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
+
+							 </td>
+						   </tr>
+						   </tbody>
+						 </table>
+					   </div>
+					   <!-- /.table-responsive -->
+					 </div>
+					 <!-- /.box-body -->
+					 <!-- /.box-footer -->
+					 <div class="box-footer">
+						 <a href="/literatur/tambah" class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true"></i> Tambah data</a>
+						 <a href="/literatur/cari/" class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Cari data</a>
+					 </div>
+				</div>
 				<!-- /.box -->
             </section>
             <!-- /.content -->
