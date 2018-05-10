@@ -32,5 +32,10 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 	public void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur) {
 		peminjamanLiteraturMapper.insertPeminjamanLiteratur(peminjamanLiteratur);
 	}
-	
+
+	@Override
+	public PeminjamanLiteraturModel selectJumlahPeminjaman(int id) {
+		PeminjamanLiteraturModel obj = peminjamanLiteraturMapper.selectJumlahPeminjaman(id);
+		return obj;
+	}
 }
