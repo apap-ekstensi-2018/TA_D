@@ -24,8 +24,8 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/literatur/tambah" method="post" id="form" th:object="${literatur}">
-                            <div class='form-group'>
+                        <form action="/literatur/upload/submit" method="POST" id="form" enctype="multipart/form-data">
+                            <!-- <div class='form-group'>
                                 <label>Judul</label>
                                 <p>
                                     <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul'>
@@ -42,15 +42,15 @@
                                 <p>
                                     <input type='text' value='' class='form-control input-sm' name='pembimbing' required placeholder='Pembimbing'>
                                 </p>
-                            </div>
+                            </div> -->
                             <div class='form-group'>
                                 <label>Upload Dokumen</label>
                                 <p>
-                                    <input type='file' value='' class='form-control input-sm' name='dokumen' accept="application/pdf" required placeholder='dokumen'>
+                                    <input type='file' value='' class='form-control input-sm' name='file' accept="application/pdf" required placeholder='dokumen'>
                                 </p>
                             </div>
                             <div>
-                                <button type="button" id="action" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
+                                <button type="submit" id="action" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -104,7 +104,7 @@
         </div>
     </div>
 </body>
-<script>
+<!-- <script>
     $("#action").click(function () {
         var form = $("#form");
         var result = form.valid();
@@ -127,5 +127,5 @@
             });
         }
     });
-</script>
+</script> -->
 </html>
