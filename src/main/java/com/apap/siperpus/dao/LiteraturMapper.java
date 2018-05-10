@@ -40,4 +40,15 @@ public interface LiteraturMapper {
     @Select("select * from literatur where id = #{id}")
     LiteraturModel selectLiteratur(@Param("id") int id);
 
+    @Select("select * from literatur where judul like CONCAT('%',#{judul},'%')")
+    List<LiteraturModel> selectLiteraturWithConditionTitle(@Param("judul") String judul);
+
+    @Select("select * from literatur where penulis like CONCAT('%',#{penulis},'%')")
+    List<LiteraturModel> selectLiteraturWithConditionAuthor(@Param("penulis") String penulis);
+
+    @Select("select * from literatur where penerbit like CONCAT('%',#{penerbit},'%')")
+    List<LiteraturModel> selectLiteraturWithConditionPublisher(@Param("penerbit") String penerbit);
+
+    @Select("select * from literatur where jenis_literatur like CONCAT('%',#{jenis_literatur},'%')")
+    List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(@Param("jenis_literatur") String jenis_literatur);
 }

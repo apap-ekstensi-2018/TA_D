@@ -56,4 +56,32 @@ public class LiteraturServiceDatabase implements LiteraturService {
         log.info("Delete literatur with id "+id);
         literaturMapper.deleteLiteratur(id);
     }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionTitle(String judul) {
+        log.info("Select literatur with condition title");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionTitle(judul);
+        return literaturs;
+    }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionAuthor(String penulis) {
+        log.info("Select literatur with condition author");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionAuthor(penulis);
+        return literaturs;
+    }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionPublisher(String penerbit) {
+        log.info("Select literatur with condition publisher");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionPublisher(penerbit);
+        return literaturs;
+    }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(String jenis_literatur) {
+        log.info("Select literatur with condition type of literature");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionTypeOfLiteature(jenis_literatur);
+        return literaturs;
+    }
 }

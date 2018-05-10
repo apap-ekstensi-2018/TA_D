@@ -1,5 +1,7 @@
 package com.apap.siperpus.controller;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.service.LiteraturService;
@@ -89,9 +91,27 @@ public class LiteraturController {
     	return "Literatur/uploadKaryaTulis";
     }
 
-    @RequestMapping("/cari")
+    @RequestMapping("/cari/")
     public String cariLiteratur() {
         return "Literatur/cariLiteratur";
     }
 
+    @RequestMapping("/cari")
+    public String submitCari(Model model, @RequestParam("judul") String judul, @RequestParam("penulis") String penulis, @RequestParam("penerbit") String penerbit,  @RequestParam("jenis_literatur") String jenis_literatur) {
+        Set<LiteraturModel> literaturs = new HashSet<>();
+        if(judul != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionTitle(judul));
+        }
+        if(penulis != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionAuthor(penulis));
+        }
+        if(penerbit != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionPublisher(penerbit));
+        }
+        if(jenis_literatur != "") {
+            literaturs.addAll(literaturDAO.selectLiteraturWithConditionTypeOfLiteature(jenis_literatur));
+        }
+        model.addAttribute ("literaturs", literaturs);
+        return "Literatur/daftarLiteratur";
+    }
 }

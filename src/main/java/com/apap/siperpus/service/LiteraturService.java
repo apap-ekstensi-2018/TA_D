@@ -23,4 +23,12 @@ public interface LiteraturService {
     void insertLiteratur(String judul, String penulis, String penerbit, String jenis_literatur, int jumlah);
 
     void deleteLiteratur(int id);
+
+    List<LiteraturModel> selectLiteraturWithConditionTitle(String judul);
+
+    List<LiteraturModel> selectLiteraturWithConditionAuthor(String penulis);
+
+    List<LiteraturModel> selectLiteraturWithConditionPublisher(String penerbit);
+
+    List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(String jenis_literatur);
 }
