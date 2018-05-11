@@ -2,15 +2,16 @@ package com.apap.siperpus.controller;
 
 import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.model.PeminjamanLiteraturModel;
+import com.apap.siperpus.model.SuratReturnModel;
 import com.apap.siperpus.service.LiteraturService;
+import com.apap.siperpus.service.SuratService;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class PeminjamanController {
 
     @Autowired
     LiteraturService literaturDAO;
+
+    @Autowired
+    SuratService suratDAO;
 
     @RequestMapping("/tambah")
     public String tambahPeminjaman(Model model) {
@@ -37,6 +41,13 @@ public class PeminjamanController {
         return "Peminjaman/detailPeminjaman";
     }
 
+    @RequestMapping(value="/tambah", method=RequestMethod.POST)
+    public @ResponseBody boolean tambahPeminjaman(Model model, @ModelAttribute("data") String data) {
+
+        JSONArray dataArray = new JSONArray(data);
+
+        return true;
+    }
 
     @RequestMapping(value="/select/literatur", method= RequestMethod.GET)
     public ResponseEntity<List<LiteraturModel>> selectLiteratur(Model model)
@@ -44,6 +55,21 @@ public class PeminjamanController {
         List<LiteraturModel> literaturModels = literaturDAO.selectAllLiteratur();
         return new ResponseEntity<List<LiteraturModel>>(literaturModels, HttpStatus.OK);
     }
+
+    @RequestMapping(value="/getJenisLiteratur/{literatur}", method= RequestMethod.GET)
+    public ResponseEntity<String> getJenisLiteratur(Model model, @PathVariable(value = "literatur") int literatur)
+    {
+        LiteraturModel literaturModels = literaturDAO.selectLiteratur(literatur);
+        return new ResponseEntity<String>(literaturModels.getJenis_literatur(), HttpStatus.OK);
+    }
+
+    @RequestMapping("/surat/view/{id_literatur}")
+    public ResponseEntity<SuratReturnModel>  getSurat(Model model, @PathVariable(value = "id_literatur") String id_literatur)
+    {
+        SuratReturnModel surat = suratDAO.selectSurat(id_literatur);
+        return new ResponseEntity<SuratReturnModel>(surat, HttpStatus.OK);
+    }
+
 
     public String selectJudulLiteraturById(int id)
     {

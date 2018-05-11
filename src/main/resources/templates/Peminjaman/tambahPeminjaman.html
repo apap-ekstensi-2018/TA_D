@@ -9,7 +9,7 @@
 <div class="wrapper">
     <div th:replace="fragments/fragment :: header"></div>
     <div th:replace="fragments/fragment :: sidebar"></div>
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="background-color: white;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -30,6 +30,12 @@
                             <label>Literatur</label>
                             <p>
                                 <select name="id_literatur" id="id_literatur"></select>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label>Jenis Literatur</label>
+                            <p>
+                                <input type='text' value='' class='form-control input-sm' name='jenis_literatur' readonly="readonly">
                             </p>
                         </div>
                         <div class='form-group'>
@@ -68,7 +74,7 @@
                         <div class='form-group'>
                             <label>Id Surat</label>
                             <p>
-                                <input type='text' value='' class='form-control input-sm' name='id_surat' placeholder='surat'>
+                                <input type='text' value='' class='form-control input-sm' name='id_surat' placeholder='surat' readonly="readonly">
                             </p>
                         </div>
                         <div>
@@ -81,14 +87,52 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
     <div th:replace="fragments/fragment :: footer"></div>
     <div th:replace="fragments/fragment :: javascript"></div>
+
+    <div class="modal modal-danger fade" id="modal-gagal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Gagal</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Gagal</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-success fade" id="modal-berhasil">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Berhasil</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Peminjaman Literatur berhasil ditambahkan !</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 </body>
-</html>
 
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
     load_dropdown_literatur();
 });
@@ -109,14 +153,65 @@ function load_dropdown_literatur(){
                         callback();
                     },
                     success: function(res){
+                        console.log(res);
                         callback(res);
                     }
                 })
             },
-            onChange: function(e){
-                $("#prodi_parent").find("span").remove();
+            onChange: function(value){
+                console.log(value);
+                getJenisLiteratur(value);
             }
         });
-    prodi = $prodi[0].selectize;
+    var literatur = $literatur[0].selectize;
 }
+
+function getJenisLiteratur(literatur){
+    $.ajax({
+        url: "/peminjaman/getJenisLiteratur/"+literatur,
+        type: "GET",
+        error: function(){
+            callback();
+        },
+        success: function(res){
+            console.log(res);
+            $("input[name='jenis_literatur']").val(res);
+            if((res == "Skripsi") || (res == "Tesis") || (res == "Disertasi")){
+                $("input[name='id_surat']").prop('readonly', false);
+                $("input[name='id_surat']").val("");
+            }else{
+                $("input[name='id_surat']").prop('readonly', true);
+                $("input[name='id_surat']").val("");
+            }
+        }
+    })
+}
+
+$("#action").click(function () {
+    var form = $("#form");
+    var result = form.valid();
+    $("label.error").css('color','red');
+    if(result){
+        $.ajax({
+            url:'/literatur/tambah',
+            method:'post',
+            data:{
+                data:JSON.stringify(form.serializeArray())
+            },
+            dataType:'json',
+            success: function (resp) {
+                console.log(JSON.stringify(form.serializeArray()));
+            /*
+                if(resp){
+                    $("#modal-berhasil").modal("show");
+                    form[0].reset();
+                }else{
+                    $("#modal-gagal").modal("show");
+                }*/
+            },
+            error: function(e){ alert ("Error " + e); }
+        });
+    }
+});
 </script>
+</html>
