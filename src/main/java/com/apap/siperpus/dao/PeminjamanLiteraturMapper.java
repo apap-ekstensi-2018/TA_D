@@ -53,4 +53,7 @@ public interface PeminjamanLiteraturMapper {
 
 	@Select("SELECT * FROM peminjaman_literatur where id = #{id_literatur}")
 	PeminjamanLiteraturModel selectPeminjamanLiteraturById(@Param("id_literatur") String id_literatur);
+	
+	@Select("SELECT * FROM peminjaman_literatur where username_peminjaman = #{username}")
+	List<PeminjamanLiteraturModel> selectPeminjamanLiteraturByUsername(String username);
 }
