@@ -109,4 +109,19 @@
         <div th:replace="fragments/fragment :: javascriptTable"></div>
     </div>
 </body>
+
+<script type="text/javascript">
+    window.onload = function(){
+        //document.getElementById('send').onclick = function(e)
+		var oldURL = document.referrer;
+        console.log(oldURL.search("/literatur/ubah"));
+		if(oldURL.search("/literatur/ubah")!=-1){
+            window.alert("Save sukses");
+
+		}
+
+        //    return false;
+        //}
+    }
+</script>
 </html>
