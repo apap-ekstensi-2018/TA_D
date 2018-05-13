@@ -14,10 +14,7 @@ import com.apap.siperpus.model.PengadaanLiteraturModel;
 public interface PengadaanLiteraturMapper {
 	
 	@Select("SELECT * FROM pengadaan_literatur WHERE username=#{username}")
-	@Results({
-		@Result(property="usernameRequester", column="username_requester")
-	})
-	List<PengadaanLiteraturModel> selectPengadaanLiteraturByUsernameRequester(String usernameRequester);
+	List<PengadaanLiteraturModel> selectPengadaanLiteraturByUsername(String username);
 	
 	@Select("SELECT * FROM pengadaan_literatur WHERE judul=#{judul}")
 	@Results({
@@ -26,9 +23,6 @@ public interface PengadaanLiteraturMapper {
 	PengadaanLiteraturModel selectPengadaanLiteraturByJudul(String judul);
 	
 	@Select("SELECT * FROM pengadaan_literatur")
-	@Results({
-		@Result(property="usernameRequester", column="username_requester")
-	})
 	List<PengadaanLiteraturModel> selectAllPengadaanLiteratur();
 	
 	@Insert("INSERT INTO pengadaan_literatur VALUES ("
