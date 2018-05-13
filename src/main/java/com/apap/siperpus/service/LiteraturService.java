@@ -36,4 +36,5 @@ public interface LiteraturService {
     List<LiteraturModel> selectLiteraturWithConditionPublisher(String penerbit);
 
     List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(String jenis_literatur);
+    
 }

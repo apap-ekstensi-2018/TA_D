@@ -100,4 +100,5 @@ public class LiteraturServiceDatabase implements LiteraturService {
         List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionTypeOfLiteature(jenis_literatur);
         return literaturs;
     }
+
 }

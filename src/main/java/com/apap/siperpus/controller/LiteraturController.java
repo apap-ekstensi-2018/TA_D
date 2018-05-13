@@ -95,23 +95,29 @@ public class LiteraturController {
 	}
 
 	@RequestMapping(value = "/upload/submit", method = RequestMethod.POST)
-	public String submitKaryaTulis(@RequestParam("file") MultipartFile file, LiteraturModel literatur, RedirectAttributes redirectAttributes) {
+	public String submitKaryaTulis(@ModelAttribute("literatur") LiteraturModel literatur, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Model model) {
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
 				Path path = Paths.get(PATH_FILE_UPLOAD + file.getOriginalFilename());
 				//System.err.println(path.toString());
 				Files.write(path, bytes);
+				//System.out.println(literatur.getJudul()+ " "+ literatur.getPenulis());
+				literaturDAO.insertLiteratur(literatur.getJudul(), literatur.getPenulis(), literatur.getPenerbit(), literatur.getJenis_literatur(), 1);
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				return "redirect:/literatur/upload";
 			}
 		}
-		//System.out.println("OK");
-		return "Literatur/uploadKaryaTulis";
+		return "redirect:/literatur/upload";
 	}
 
 	@RequestMapping("/upload")
-	public String uploadKaryaTulis() {
+	public String uploadKaryaTulis(Model model) {
+		String[] jenisLiteratur = {"Jurnal", "Buku Referensi", "Publikasi", "Tugas Akhir", "Skripsi", "Tesis", "Disertasi"};
+		model.addAttribute("listJenisLiteratur", jenisLiteratur);
+		model.addAttribute("literatur", new LiteraturModel());
 		return "Literatur/uploadKaryaTulis";
 	}
 

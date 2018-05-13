@@ -24,25 +24,33 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/literatur/upload/submit" method="POST" id="form" enctype="multipart/form-data">
-                            <!-- <div class='form-group'>
+                        <form action="/literatur/upload/submit" method="POST" id="form" enctype="multipart/form-data" th:object="${literatur}">
+                            <div class='form-group'>
                                 <label>Judul</label>
                                 <p>
-                                    <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul'>
+                                    <input type='text' value='' class='form-control input-sm' name='judul' id="judul" required placeholder='Judul' th:field="*{judul}">
                                 </p>
                             </div>
                             <div class='form-group'>
                                 <label>Penulis</label>
                                 <p>
-                                    <input type='text' value='' class='form-control input-sm' name='penulis' required placeholder='Penulis'>
+                                    <input type='text' value='' class='form-control input-sm' name='penulis' required placeholder='Penulis' th:field="*{penulis}">
                                 </p>
                             </div>
                             <div class='form-group'>
                                 <label>Pembimbing</label>
                                 <p>
-                                    <input type='text' value='' class='form-control input-sm' name='pembimbing' required placeholder='Pembimbing'>
+                                    <input type='text' value='' class='form-control input-sm' name='pembimbing' required placeholder='Pembimbing' th:field="*{penerbit}">
                                 </p>
-                            </div> -->
+                            </div>
+                            <div class='form-group'>
+                                <label>Jenis Literatur</label>
+                                <p>
+                                	<select class="custom select" th:field="*{jenis_literatur}" required>
+                                		<option th:each="data : ${listJenisLiteratur}" th:value="${data}" th:text="${data}"></option>
+                                	</select>    
+                                </p>
+                            </div>
                             <div class='form-group'>
                                 <label>Upload Dokumen</label>
                                 <p>
@@ -104,17 +112,17 @@
         </div>
     </div>
 </body>
-<!-- <script>
+<script>
     $("#action").click(function () {
         var form = $("#form");
         var result = form.valid();
         $("label.error").css('color','red');
         if(result){
             $.ajax({
-                url:'/literatur/tambah',
+                /* url:'/literatur/upload/submit',
                 method:'post',
-                data:{data:JSON.stringify(form.serializeArray())},
-                dataType:'json',
+                enctype:'multipart/form-data',
+                data:result */
                 success: function (resp) {
                     if(resp){
                         $("#modal-berhasil").modal("show");
@@ -127,5 +135,5 @@
             });
         }
     });
-</script> -->
+</script>
 </html>
