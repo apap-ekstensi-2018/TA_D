@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/literatur")
 public class LiteraturController {
 	//private static final String BASE_PATH = "C://Users//Gani Gemilar//Documents//workspace-sts-3.9.2.RELEASE//TA_D//";
-	private static final String BASE_PATH = System.clearProperty("user.dir");
+	private static final String BASE_PATH = System.getProperty("user.dir");
 	private static final String PATH_FILE_UPLOAD = BASE_PATH + "//pdf//";
 
 	@Autowired
