@@ -12,9 +12,10 @@
     <div class="content-wrapper" style="background-color: white;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                Detail Peminjaman Literatur
+            <h1 >
+                Peminjaman Literatur
             </h1>
+            <input type="hidden" id="usernameLogin" th:value="${#httpServletRequest.remoteUser}" />
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
                 <li class="active">Detail Peminjaman Literatur</li>
@@ -26,6 +27,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <form action="/peminjaman/tambah" method="post" id="form">
+                        <input type='hidden' value='' class='form-control input-sm' name='username_peminjaman' required placeholder='Username'>
+
                         <div class='form-group'>
                             <label>Literatur</label>
                             <p>
@@ -39,15 +42,9 @@
                             </p>
                         </div>
                         <div class='form-group'>
-                            <label>Username</label>
-                            <p>
-                                <input type='text' value='' class='form-control input-sm' name='username_peminjaman' required placeholder='Username'>
-                            </p>
-                        </div>
-                        <div class='form-group'>
                             <label>Tanggal Peminjaman</label>
                             <p>
-                                <input type='date' value='' class='form-control input-sm' name='tanggal_peminjaman' required placeholder='Tanggal Peminjaman'>
+                                <input type='date' value='' class='form-control input-sm' name='tanggal_peminjaman' required placeholder='Tanggal Peminjaman' >
                             </p>
                         </div>
                         <div class='form-group'>
@@ -57,28 +54,17 @@
                             </p>
                         </div>
                         <div class='form-group'>
-                            <label>Status Peminjaman</label>
-                            <p>
-                                <select name="status_peminjaman" class="form-control input-sm" required>
-                                    <option value="">-- Pilih --</option>
-                                    <option value="Belum diproses">Belum diproses</option>
-                                    <option value="Disetujui">Disetujui</option>
-                                    <option value="Ditolak">Ditolak</option>
-                                    <option value="Sudah diambil">Sudah diambil</option>
-                                    <option value="Sudah dikembalikan">Sudah dikembalikan</option>
-                                    <option value="Belum dikembalikan">Belum dikembalikan</option>
-                                    <option value="Overdue">Overdue</option>
-                                </select>
-                            </p>
-                        </div>
-                        <div class='form-group'>
                             <label>Id Surat</label>
-                            <p>
-                                <input type='text' value='' class='form-control input-sm' name='id_surat' placeholder='surat' readonly="readonly">
-                            </p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>
+                                        <input type='number' value='' class='form-control input-sm' name='id_surat' placeholder='surat' readonly="readonly">
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <button type="button" id="action" name="action" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Simpan</button>
+                            <button type="button" id="action" name="action" class="btn btn-success btn-xs" disabled="disabled"><i class="fa fa-plus"></i> Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -99,7 +85,7 @@
                     <h4 class="modal-title">Gagal</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Gagal</p>
+                    <div id="pesan"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
@@ -119,7 +105,7 @@
                     <h4 class="modal-title">Berhasil</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Peminjaman Literatur berhasil ditambahkan !</p>
+                    <div id="pesanBerhasil"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
@@ -131,7 +117,12 @@
     </div>
 </div>
 </body>
-
+<style>
+    .input-sm,
+    .selectize-input{
+        max-width:300px;
+    }
+</style>
 <script>
 $(document).ready(function(){
     load_dropdown_literatur();
@@ -153,13 +144,11 @@ function load_dropdown_literatur(){
                         callback();
                     },
                     success: function(res){
-                        console.log(res);
                         callback(res);
                     }
                 })
             },
             onChange: function(value){
-                console.log(value);
                 getJenisLiteratur(value);
             }
         });
@@ -174,17 +163,28 @@ function getJenisLiteratur(literatur){
             callback();
         },
         success: function(res){
-            console.log(res);
             $("input[name='jenis_literatur']").val(res);
             if((res == "Skripsi") || (res == "Tesis") || (res == "Disertasi")){
                 $("input[name='id_surat']").prop('readonly', false);
+                $("#action").prop('disabled', true);
                 $("input[name='id_surat']").val("");
             }else{
                 $("input[name='id_surat']").prop('readonly', true);
+                $("#action").prop('disabled', false);
                 $("input[name='id_surat']").val("");
             }
         }
     })
+}
+
+function getNpmByIdMahasiswa(id)
+{
+    var url = 'https://cors.io/?https://apap-fasilkom.herokuapp.com/api/mahasiswa/view/id/'+id;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+    var data = JSON.parse(xmlHttp.responseText);
+    return data["npm"];
 }
 
 $("#action").click(function () {
@@ -193,25 +193,100 @@ $("#action").click(function () {
     $("label.error").css('color','red');
     if(result){
         $.ajax({
-            url:'/literatur/tambah',
+            url:'/peminjaman/tambah',
             method:'post',
             data:{
                 data:JSON.stringify(form.serializeArray())
             },
             dataType:'json',
             success: function (resp) {
-                console.log(JSON.stringify(form.serializeArray()));
-            /*
-                if(resp){
-                    $("#modal-berhasil").modal("show");
-                    form[0].reset();
-                }else{
-                    $("#modal-gagal").modal("show");
-                }*/
+                console.log(resp);
             },
-            error: function(e){ alert ("Error " + e); }
+            error: function(e){
+                console.log ("Error " + e[0]);
+                console.log ("Error " + e[1]);
+            }
         });
     }
 });
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+$("input[name='id_surat']").keyup(function(e) {
+    if (e.keyCode > 47 || e.keyCode < 58) {
+        console.log(e.keyCode)
+        e.preventDefault();
+        delay(function(){
+                var data = {
+                    id_surat:$("input[name='id_surat']").val()
+                };
+                console.log(JSON.stringify(data))
+                $.ajax({
+                    url:'/peminjaman/cekStatusSurat',
+                    method:'post',
+                    data: {
+                        data:JSON.stringify(data)
+                    },
+                    dataType: 'json',
+                    success: function(resp) {
+                        if(getNpmByIdMahasiswa(resp.Surat.id_mahasiswa) == $("#usernameLogin").val())
+                        {
+                            if(resp.Surat.status_surat != "Selesai")
+                                {
+                                    $("#modal-gagal").modal("show");
+                                    $("#pesan").html("");
+                                    $("#pesan").append(resp.Surat.jenis_surat + '<br/>' + resp.Surat.keterangan_surat + '<br/>' + resp.Surat.status_surat);
+                                }
+                                else
+                                {
+                                    $("#action").prop('disabled', false);
+                                }
+                        }
+                        else{
+                            $("#modal-gagal").modal("show");
+                            $("#pesan").html("");
+                            $("#pesan").append("Id Surat Tidak Valid");
+                        }
+                        /*
+                            lakukan pengecekan antara id_mahasiswa yang ada di service dengan id_mahasiswa login
+                            tambahkan fungsi getIdMahasiswaByNpm(String npm)
+                            if mahasiswa.login.siperpus.npm == sisurat.service.id_mahasiswa
+                                if sisurat.status_surat != selesai
+                                    tampilkan status_surat
+                                else
+                                    boleh diambil
+                            else
+                                id_surat tidak valid
+
+                                if(resp.Surat.status_surat != "Selesai")
+                                {
+                                    $("#modal-gagal").modal("show");
+                                    $("#pesan").html("");
+                                    $("#pesan").append(resp.Surat.jenis_surat + '<br/>' + resp.Surat.keterangan_surat + '<br/>' + resp.Surat.status_surat);
+                                }
+                                else
+                                {
+                                    $("#action").prop('disabled', false);
+                                }
+                        */
+
+
+                    },
+                    error: function(resp) {
+                        console.log(resp.Message);
+                        $("#modal-gagal").modal("show");
+                        $("#pesan").text('id surat ' + $("input[name='id_surat']").val() + ' ' + resp.Message);
+                    }
+                });
+            }, 1000);
+    }
+});
+
 </script>
 </html>

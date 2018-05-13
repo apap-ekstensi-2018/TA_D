@@ -2,10 +2,12 @@ package com.apap.siperpus.controller;
 
 import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.model.PeminjamanLiteraturModel;
+import com.apap.siperpus.model.Response;
 import com.apap.siperpus.model.SuratReturnModel;
 import com.apap.siperpus.service.LiteraturService;
 import com.apap.siperpus.service.SuratService;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class PeminjamanController {
     @Autowired
     SuratService suratDAO;
 
+    
+
     @RequestMapping("/tambah")
     public String tambahPeminjaman(Model model) {
 
@@ -43,10 +47,18 @@ public class PeminjamanController {
 
     @RequestMapping(value="/tambah", method=RequestMethod.POST)
     public @ResponseBody boolean tambahPeminjaman(Model model, @ModelAttribute("data") String data) {
+        try
+        {
+            JSONArray dataArray = new JSONArray(data);
+            //SuratReturnModel surat = suratDAO.selectSurat(dataArray.getJSONObject(0).getString("value"));
+            String tgl_masuk;
 
-        JSONArray dataArray = new JSONArray(data);
-
-        return true;
+            //return "Peminjaman/tambahPeminjaman";
+            return true;
+        }catch (Exception e) {
+            //return false;
+        }
+        return false;
     }
 
     @RequestMapping(value="/select/literatur", method= RequestMethod.GET)
@@ -64,12 +76,27 @@ public class PeminjamanController {
     }
 
     @RequestMapping("/surat/view/{id_literatur}")
-    public ResponseEntity<SuratReturnModel>  getSurat(Model model, @PathVariable(value = "id_literatur") String id_literatur)
+    public String  getSurat(Model model, @PathVariable(value = "id_literatur") String id_literatur)
     {
         SuratReturnModel surat = suratDAO.selectSurat(id_literatur);
-        return new ResponseEntity<SuratReturnModel>(surat, HttpStatus.OK);
+        model.addAttribute("surat", surat.getSurat().getId_mahasiswa());
+        return "Peminjaman/coba";
     }
 
+    @RequestMapping(value="/cekStatusSurat", method = RequestMethod.POST)
+    public ResponseEntity<?> cekStatusSurat(Model model, @ModelAttribute("data") String data)
+    {
+        JSONObject dataArray = new JSONObject(data);
+        SuratReturnModel surat = suratDAO.selectSurat(dataArray.getString("id_surat"));
+        if(surat.getStatus().equals("200"))
+        {
+            return new ResponseEntity<SuratReturnModel>(surat, HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<SuratReturnModel>(surat, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     public String selectJudulLiteraturById(int id)
     {

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +18,6 @@ public class SuratReturnModel {
     @JsonProperty("Message")
     private String Message;
 
-    @JsonProperty("Data Surat")
-    private List<SuratModel> Data_Surat;
+    @JsonProperty("Surat")
+    private SuratModel Surat;
 }
