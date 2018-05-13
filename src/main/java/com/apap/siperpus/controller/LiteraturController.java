@@ -48,7 +48,7 @@ public class LiteraturController {
 		System.out.println("Literatur id : " + literaturModel.getId());
 		System.out.println(literaturModel.getStatus());
 		literaturDAO.ubahLiteratur(literaturModel);
-		return "redirect:/literatur/tambah";
+		return "redirect:/literatur/viewall";
 	}
 
 	@RequestMapping("/view/{id}")
