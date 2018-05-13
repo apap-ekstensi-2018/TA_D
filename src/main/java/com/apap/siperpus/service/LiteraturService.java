@@ -28,4 +28,13 @@ public interface LiteraturService {
     List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur ();
 
     PeminjamanLiteraturModel selectPeminjamanLiteraturById(String id_literatur);
+
+    List<LiteraturModel> selectLiteraturWithConditionTitle(String judul);
+
+    List<LiteraturModel> selectLiteraturWithConditionAuthor(String penulis);
+
+    List<LiteraturModel> selectLiteraturWithConditionPublisher(String penerbit);
+
+    List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(String jenis_literatur);
+    
 }

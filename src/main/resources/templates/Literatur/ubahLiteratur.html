@@ -8,7 +8,7 @@
 <div class="wrapper">
     <div th:replace="fragments/fragment :: header"></div>
     <div th:replace="fragments/fragment :: sidebar"></div>
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="background-color: white;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -22,69 +22,58 @@
 
         <!-- Main content -->
         <section class="content">
-            <form action="/literatur/ubah/submit" method="post" th:object="${literatur}">
-                <div class="form-control">
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>ID</strong>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="id" name="id" th:value="${literatur.id}" th:field="*{id}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>Judul</strong>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="judul" name="judul" th:value="${literatur.judul}" th:field="*{judul}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>Penulis</strong>
-                        </div>
-                        <div class="col-md-4" id="tgllahir_parent">
-                            <input type="text" class="form-control" name="penulis" id="penulis" th:value="${literatur.penulis}" th:field="*{penulis}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>Penerbit</strong>
-                        </div>
-                        <div class="col-md-4" id="jenkel_parent">
-                            <input type="text" class="form-control" id="penerbit" name="penerbit"  th:value="${literatur.penerbit}" th:field="*{penerbit}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>Jenis Literatur</strong>
-                        </div>
-                        <div class="col-md-4" id="agama_parent">
-                            <input type="text" class="form-control" name="jenis_literatur" id="jenis_literatur" th:value="${literatur.jenis_literatur}" th:field="*{jenis_literatur}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>Jumlah</strong>
-                        </div>
-                        <div class="col-md-4" id="goldar_parent">
-                            <input type="text" class="form-control" name="jumlah" id="jumlah" th:value="${literatur.jumlah}" th:field="*{jumlah}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <strong>Status</strong>
-                        </div>
-                        <div class="col-md-4" id="thnmsk_parent">
-                            <input type="text" class="form-control" name="status" id="status" th:value="${literatur.status}" th:field="*{status}" />
-                        </div>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="save" class="btn btn-default">Simpan</button>
-                    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/literatur/ubah/submit" method="post" th:object="${literatur}">
+                            <div class="form-group">
+                                <label>ID</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" id="id" name="id" th:value="${literatur.id}" th:field="*{id}" disabled/>
+                                    <input type="hidden" class="form-control input-sm" id="id" name="id" th:value="${literatur.id}" th:field="*{id}"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Judul</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" id="judul" name="judul" th:value="${literatur.judul}" th:field="*{judul}" />
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Penulis</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" name="penulis" id="penulis" th:value="${literatur.penulis}" th:field="*{penulis}"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Penerbit</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" id="penerbit" name="penerbit"  th:value="${literatur.penerbit}" th:field="*{penerbit}" />
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Literatur</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" name="jenis_literatur" id="jenis_literatur" th:value="${literatur.jenis_literatur}" th:field="*{jenis_literatur}" />
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Jumlah</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" name="jumlah" id="jumlah" th:value="${literatur.jumlah}" th:field="*{jumlah}">
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <p>
+                                    <input type="text" class="form-control input-sm" name="status" id="status" th:value="${literatur.status}" th:field="*{status}" />
+                                </p>
+                            </div>
+                            <div>
+                                <button type="submit" name="action" value="save" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>Simpan</button>
+                            </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </section>
         <!-- /.content -->
     </div>

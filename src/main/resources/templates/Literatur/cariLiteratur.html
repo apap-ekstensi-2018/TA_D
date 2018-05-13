@@ -1,0 +1,81 @@
+<!--
+ * Created on : May, 07 2018 
+ * Author     : Kurniawan Hendi Wijaya
+ * Name       : Hendi
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cari Literatur</title>
+    <div th:replace="fragments/fragment :: head"></div>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragments/fragment :: header"></div>
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-wrapper" style="background-color: white;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Cari Literatur
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
+                <li class="active">Cari Literatur</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/literatur/cari" method="get" id="form">
+                        <div class='form-group'>
+                            <label >Judul</label>
+                            <p>
+                                <input type='text' value='' class='form-control input-sm' name='judul' id="judul" placeholder='Judul'>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label >Penulis</label>
+                            <p>
+                                <input type='text' value='' class='form-control input-sm' name='penulis' placeholder='Penulis'>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label >Penerbit</label>
+                            <p>
+                                <input type='text' value='' class='form-control input-sm' name='penerbit' placeholder='Penerbit'>
+                            </p>
+                        </div>
+                        <div class='form-group'>
+                            <label >Jenis Literatur</label>
+                            <p>
+                                <select name="jenis_literatur" class="form-control input-sm">
+                                    <option value="">-- Pilih --</option>
+                                    <option value="Jurnal">Jurnal</option>
+                                    <option value="Buku Referensi">Buku Referensi</option>
+                                    <option value="Publikasi">Publikasi</option>
+                                    <option value="Tugas Akhir">Tugas Akhir</option>
+                                    <option value="Skripsi">Skripsi</option>
+                                    <option value="Tesis">Tesis</option>
+                                    <option value="Disertasi">Disertasi</option>
+                                </select>
+                            </p>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-success btn-xs"><i class="fa fa-search"></i> Cari</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div th:replace="fragments/fragment :: footer"></div>
+    <div th:replace="fragments/fragment :: javascript"></div>
+</div>
+</body>
+</html>

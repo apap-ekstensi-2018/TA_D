@@ -2,19 +2,22 @@ package com.apap.siperpus.controller;
 
 import com.apap.siperpus.model.LiteraturModel;
 import com.apap.siperpus.model.PeminjamanLiteraturModel;
-import com.apap.siperpus.model.Response;
-import com.apap.siperpus.model.SuratReturnModel;
 import com.apap.siperpus.service.LiteraturService;
-import com.apap.siperpus.service.SuratService;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.apap.siperpus.service.PeminjamanLiteraturService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.*;
-
+import com.apap.siperpus.model.SuratReturnModel;
+import com.apap.siperpus.service.SuratService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.util.List;
 
 @Controller
@@ -27,7 +30,8 @@ public class PeminjamanController {
     @Autowired
     SuratService suratDAO;
 
-    
+    @Autowired
+    PeminjamanLiteraturService peminjamanDAO;
 
     @RequestMapping("/tambah")
     public String tambahPeminjaman(Model model) {
@@ -154,4 +158,21 @@ public class PeminjamanController {
         }
         return namaBulan;
     }
+
+    @RequestMapping("ubah/{id}")
+    public String ubahPeminjaman (Model model, @PathVariable(value="id") int id)
+    {
+        System.out.println("ubah Peminjaman :" + id);
+        PeminjamanLiteraturModel peminjaman = peminjamanDAO.selectPeminjamanLiteraturById(id);
+        model.addAttribute("peminjaman", peminjaman);
+        return "Peminjaman/ubahPeminjaman";
+    }
+
+    @RequestMapping(value = "/ubah/submit", method = RequestMethod.POST)
+    public String ubahPeminjamanSubmit(@ModelAttribute PeminjamanLiteraturModel peminjamanLiteraturModel) {
+        peminjamanDAO.ubahPeminjaman(peminjamanLiteraturModel);
+        return "redirect:/peminjaman/viewall";
+    }
+
+
 }
