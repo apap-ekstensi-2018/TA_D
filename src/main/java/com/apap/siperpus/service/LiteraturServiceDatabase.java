@@ -35,6 +35,10 @@ public class LiteraturServiceDatabase implements LiteraturService {
     public LiteraturModel selectLiteratur(int id)
     {
         log.info ("select literatur with id {}", id);
+        LiteraturModel modelExist = literaturMapper.selectLiteratur (id);
+        // detil peminjaman select by literatur id
+        PeminjamanLiteraturModel peminjamanExist = peminjamanLiteraturMapper.selectJumlahPeminjaman(id);
+        modelExist.setJumlah(modelExist.getJumlah()-peminjamanExist.getJumlah_peminjaman());
         return literaturMapper.selectLiteratur (id);
     }
 
@@ -69,8 +73,36 @@ public class LiteraturServiceDatabase implements LiteraturService {
     }
 
     @Override
-    public PeminjamanLiteraturModel selectPeminjamanLiteraturById(String id_literatur){
+    public PeminjamanLiteraturModel selectPeminjamanLiteraturById(String id_literatur) {
         log.info("select by literatur id" + id_literatur);
         return peminjamanLiteraturMapper.selectPeminjamanLiteraturById(id_literatur);
     }
+
+    public List<LiteraturModel> selectLiteraturWithConditionTitle(String judul) {
+        log.info("Select literatur with condition title");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionTitle(judul);
+        return literaturs;
+    }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionAuthor(String penulis) {
+        log.info("Select literatur with condition author");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionAuthor(penulis);
+        return literaturs;
+    }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionPublisher(String penerbit) {
+        log.info("Select literatur with condition publisher");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionPublisher(penerbit);
+        return literaturs;
+    }
+
+    @Override
+    public List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(String jenis_literatur) {
+        log.info("Select literatur with condition type of literature");
+        List<LiteraturModel> literaturs = literaturMapper.selectLiteraturWithConditionTypeOfLiteature(jenis_literatur);
+        return literaturs;
+    }
+
 }

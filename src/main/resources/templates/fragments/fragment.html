@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Fragment</title>
+    <link rel="icon" type="image/png" href="/dist/img/favicon.png" sizes="16x16"/>
     <div th:fragment="head">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
@@ -54,7 +54,7 @@
     <div th:fragment="header">
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a th:href="@{'/'}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>SI</b>P</span>
                 <!-- logo for regular state and mobile devices -->
@@ -109,13 +109,13 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="active treeview" th:if="${#httpServletRequest.isUserInRole('STAF')}" >
+                    <li class="active treeview" >
                         <a href="/literatur/viewall">
                             <i class="fa fa-book"></i> <span>Lihat semua literatur</span>
                         </a>
                     </li>
                     <li class="active treeview">
-                        <a href="#">
+                        <a href="/peminjaman/tambah">
                             <i class="fa fa-list-alt"></i> <span>Peminjaman</span>
                         </a>
                     </li>
@@ -129,6 +129,7 @@
                             <i class="fa fa-file-text"></i> <span>Karya Tulis</span>
                         </a>
                     </li>
+                    
                 </ul>
             </section>
             <!-- /.sidebar -->

@@ -12,18 +12,30 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PengadaanLiteraturServiceDatabase implements PengadaanLiteraturService{
+public class PengadaanLiteraturServiceDatabase implements PengadaanLiteraturService {
 	@Autowired
-    private PengadaanLiteraturMapper pengadaanLiteraturMapper;
+	private PengadaanLiteraturMapper pengadaanLiteraturMapper;
 	
 	@Override
 	public List<PengadaanLiteraturModel> selectAllPengadaanLiteratur() {
-		return pengadaanLiteraturMapper.selectAllPengadaanLiteratur();
+		List<PengadaanLiteraturModel> obj = pengadaanLiteraturMapper.selectAllPengadaanLiteratur();
+		return obj;
 	}
 
 	@Override
-	public List<PengadaanLiteraturModel> selectPengadaanLiteraturByUsername(String username) {
-		return pengadaanLiteraturMapper.selectPengadaanLiteraturByUsername(username);
+	public List<PengadaanLiteraturModel> selectPengadaanLiteraturByUsername(String usernameRequester) {
+		List<PengadaanLiteraturModel> obj = pengadaanLiteraturMapper.selectPengadaanLiteraturByUsernameRequester(usernameRequester);
+		return obj;
 	}
 
+	@Override
+	public PengadaanLiteraturModel selectPengadaanLiteraturByJudul(String judul) {
+		PengadaanLiteraturModel obj = pengadaanLiteraturMapper.selectPengadaanLiteraturByJudul(judul);
+		return obj;
+	}
+
+	@Override
+	public void insertPengadaanLiteratur(PengadaanLiteraturModel pengadaanLiteratur) {
+		pengadaanLiteraturMapper.insertPengadaanLiteratur(pengadaanLiteratur);
+	}
 }

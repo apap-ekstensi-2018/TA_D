@@ -8,15 +8,15 @@ import com.apap.siperpus.model.PeminjamanLiteraturModel;
 
 
 public interface PeminjamanLiteraturService {
-	PeminjamanLiteraturModel selectPeminjamanLiteraturByIdLiteratur(int id);
-	
 	List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur();
 	
+	PeminjamanLiteraturModel selectPeminjamanLiteraturById(int id);
+	
 	void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur);
-	
-	void updatePeminjamanLiteraturByIdLiteratur(int idPeminajamanLiteratur);
-	
-	PeminjamanLiteraturModel selectPeminjamanLiteraturById(@Param("id_literatur") String id_literatur);
+
+	PeminjamanLiteraturModel selectJumlahPeminjaman(int id);
+
+	void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur);
 	
 	List<PeminjamanLiteraturModel> selectPeminjamanLiteraturByUsername(String username);
 }

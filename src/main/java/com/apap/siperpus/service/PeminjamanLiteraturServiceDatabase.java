@@ -12,43 +12,34 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturService{
+public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturService {
 	@Autowired
 	private PeminjamanLiteraturMapper peminjamanLiteraturMapper;
 	
-	@Override
-	public PeminjamanLiteraturModel selectPeminjamanLiteraturByIdLiteratur(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur() {
+		List<PeminjamanLiteraturModel> obj = peminjamanLiteraturMapper.selectAllPeminjamanLiteratur();
+		return obj;
 	}
 
-	@Override
-	public List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur() {
-		// TODO Auto-generated method stub
-		return null;
+	public PeminjamanLiteraturModel selectPeminjamanLiteraturById(int id) {
+		log.info("Peminjaman Literatur {}", id);
+		return peminjamanLiteraturMapper.selectPeminjamanLiteraturByIdLiteratur(id);
 	}
+
 
 	@Override
 	public void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur) {
-		// TODO Auto-generated method stub
-		
+		peminjamanLiteraturMapper.insertPeminjamanLiteratur(peminjamanLiteratur);
 	}
 
 	@Override
-	public void updatePeminjamanLiteraturByIdLiteratur(int idPeminajamanLiteratur) {
-		// TODO Auto-generated method stub
-		
+	public PeminjamanLiteraturModel selectJumlahPeminjaman(int id) {
+		PeminjamanLiteraturModel obj = peminjamanLiteraturMapper.selectJumlahPeminjaman(id);
+		return obj;
 	}
 
 	@Override
-	public PeminjamanLiteraturModel selectPeminjamanLiteraturById(String id_literatur) {
-		// TODO Auto-generated method stub
-		return null;
+	public void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur){
+		peminjamanLiteraturMapper.ubahPeminjaman(peminjamanLiteratur);
 	}
-
-	@Override
-	public List<PeminjamanLiteraturModel> selectPeminjamanLiteraturByUsername(String username) {
-		return peminjamanLiteraturMapper.selectPeminjamanLiteraturByUsername(username);
-	}
-
 }
