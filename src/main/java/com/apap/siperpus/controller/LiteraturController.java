@@ -28,8 +28,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/literatur")
 public class LiteraturController {
-	private static final String BASE_PATH = "C://Users//Gani Gemilar//Documents//workspace-sts-3.9.2.RELEASE//TA_D//";
-	private static final String PATH_FILE_UPLOAD = BASE_PATH + "pdf//";
+	//private static final String BASE_PATH = "C://Users//Gani Gemilar//Documents//workspace-sts-3.9.2.RELEASE//TA_D//";
+	private static final String BASE_PATH = System.getProperty("user.dir");
+	private static final String PATH_FILE_UPLOAD = BASE_PATH + "//pdf//";
 
 	@Autowired
 	LiteraturService literaturDAO;
@@ -102,7 +103,7 @@ public class LiteraturController {
 			try {
 				byte[] bytes = file.getBytes();
 				Path path = Paths.get(PATH_FILE_UPLOAD + file.getOriginalFilename());
-				//System.err.println(path.toString());
+				System.err.println(path.toString());
 				Files.write(path, bytes);
 				//System.out.println(literatur.getJudul()+ " "+ literatur.getPenulis());
 				literaturDAO.insertLiteratur(literatur.getJudul(), literatur.getPenulis(), literatur.getPenerbit(), literatur.getJenis_literatur(), 1);
