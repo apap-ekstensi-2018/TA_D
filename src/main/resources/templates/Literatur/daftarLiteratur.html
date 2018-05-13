@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Lihat Daftar Literatur</title>
-    <div th:replace="fragments/fragment :: head"></div>
+    <div th:replace="fragments/fragment :: headTable"></div>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -21,7 +21,11 @@
             </section>
 
             <!-- Main content -->
-            <section class="content">
+            <section class="content" style="min-height:800px !important;">
+            		<div class="text-right">
+				 	<a href="/literatur/tambah" class="btn btn-default">Tambah data</a>
+				 </div>
+				 <br/>
             		<!-- TABLE: LATEST ORDERS -->
 				<div class="box box-info">
 				  	<!-- /.box-header -->
@@ -101,8 +105,8 @@
         </div>
         <!-- /.content-wrapper -->
 
-        <div th:replace="fragments/fragment :: footer"></div>
-        <div th:replace="fragments/fragment :: javascript"></div>
+        <footer th:replace="fragments/fragment :: footer-an"></footer>
+        <div th:replace="fragments/fragment :: javascriptTable"></div>
     </div>
 </body>
 </html>

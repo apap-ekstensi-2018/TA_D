@@ -13,11 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturService {
-
 	@Autowired
 	private PeminjamanLiteraturMapper peminjamanLiteraturMapper;
 	
-	@Override
 	public List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur() {
 		List<PeminjamanLiteraturModel> obj = peminjamanLiteraturMapper.selectAllPeminjamanLiteratur();
 		return obj;
@@ -43,5 +41,10 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 	@Override
 	public void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur){
 		peminjamanLiteraturMapper.ubahPeminjaman(peminjamanLiteratur);
+	}
+
+	@Override
+	public List<PeminjamanLiteraturModel> selectPeminjamanLiteraturByUsername(String username) {
+		return peminjamanLiteraturMapper.selectPeminjamanLiteraturByUsername(username);
 	}
 }
