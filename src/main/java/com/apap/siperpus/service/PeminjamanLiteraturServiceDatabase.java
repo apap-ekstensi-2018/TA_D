@@ -42,4 +42,9 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 	public void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur){
 		peminjamanLiteraturMapper.ubahPeminjaman(peminjamanLiteratur);
 	}
+
+	@Override
+	public List<PeminjamanLiteraturModel> selectPeminjamanLiteraturByUsername(String username) {
+		return peminjamanLiteraturMapper.selectPeminjamanLiteraturByUsername(username);
+	}
 }

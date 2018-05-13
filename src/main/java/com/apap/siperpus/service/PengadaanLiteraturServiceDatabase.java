@@ -24,7 +24,7 @@ public class PengadaanLiteraturServiceDatabase implements PengadaanLiteraturServ
 
 	@Override
 	public List<PengadaanLiteraturModel> selectPengadaanLiteraturByUsername(String usernameRequester) {
-		List<PengadaanLiteraturModel> obj = pengadaanLiteraturMapper.selectPengadaanLiteraturByUsernameRequester(usernameRequester);
+		List<PengadaanLiteraturModel> obj = pengadaanLiteraturMapper.selectPengadaanLiteraturByUsername(usernameRequester);
 		return obj;
 	}
 
