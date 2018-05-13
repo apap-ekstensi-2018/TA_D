@@ -53,7 +53,16 @@
                             <div class="form-group">
                                 <label>Jenis Literatur</label>
                                 <p>
-                                    <input type="text" class="form-control input-sm" name="jenis_literatur" id="jenis_literatur" th:value="${literatur.jenis_literatur}" th:field="*{jenis_literatur}" />
+                                    <select class="form-control input-sm" name="jenis_literatur" th:field="${literatur.jenis_literatur}" />
+                                        <option value="jurnal">Jurnal</option>
+                                        <option value="Buku Referensi">Buku Referensir</option>
+                                        <option value="referensi">Referensi</option>
+                                        <option value="publikasi">Publikasi</option>
+                                        <option value="Tugas Akhir">Tugas Akhir</option>
+                                        <option value="Skripsi">Skripsi</option>
+                                        <option value="Tesis">Tesis</option>
+                                        <option value="Disertasi">Disertasi</option>
+                                    </select>
                                 </p>
                             </div>
                             <div class="form-group">
@@ -62,10 +71,13 @@
                                     <input type="text" class="form-control input-sm" name="jumlah" id="jumlah" th:value="${literatur.jumlah}" th:field="*{jumlah}">
                                 </p>
                             </div>
-                            <div class="form-group">
-                                <label>Status</label>
+                            <div class='form-group'>
+                                <label >Status</label>
                                 <p>
-                                    <input type="text" class="form-control input-sm" name="status" id="status" th:value="${literatur.status}" th:field="*{status}" />
+                                    <select name="status" class="form-control input-sm" th:field="${literatur.status}">
+                                        <option value="0">Non Aktif</option>
+                                        <option value="1">Aktif</option>
+                                    </select>
                                 </p>
                             </div>
                             <div>

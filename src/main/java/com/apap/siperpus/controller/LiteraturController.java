@@ -45,8 +45,9 @@ public class LiteraturController {
 	@RequestMapping(value = "/ubah/submit", method = RequestMethod.POST)
 	public String ubahLiteraturSubmit(@ModelAttribute LiteraturModel literaturModel) {
 		System.out.println("Literatur id : " + literaturModel.getId());
+		System.out.println(literaturModel.getStatus());
 		literaturDAO.ubahLiteratur(literaturModel);
-		return "redirect:/literatur/viewall";
+		return "redirect:/literatur/tambah";
 	}
 
 	@RequestMapping("/view/{id}")
