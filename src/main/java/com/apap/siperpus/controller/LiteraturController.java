@@ -53,7 +53,7 @@ public class LiteraturController {
 
 	@RequestMapping("/view/{id}")
 	public String viewLiteratur(Model model, @PathVariable(value = "id") int id) {
-		LiteraturModel literatur = literaturDAO.selectLiteratur(id);
+		LiteraturModel literatur = literaturDAO.selectDetailLiteratur(id);
 		model.addAttribute("literatur", literatur);
 		return "Literatur/detailLiteratur";
 	}
