@@ -105,4 +105,10 @@ public class LiteraturServiceDatabase implements LiteraturService {
         return literaturs;
     }
 
+    @Override
+    public LiteraturModel selectJenisLiteratur(int id)
+    {
+        log.info ("select literatur with id {}", id);
+        return literaturMapper.selectLiteratur (id);
+    }
 }
