@@ -15,7 +15,7 @@
             <h1 >
                 Peminjaman Literatur
             </h1>
-            <input type="hidden" id="usernameLogin" th:value="${#httpServletRequest.remoteUser}" />
+
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
                 <li class="active">Detail Peminjaman Literatur</li>
@@ -27,7 +27,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <form action="/peminjaman/tambah" method="post" id="form">
-                        <input type='hidden' value='' class='form-control input-sm' name='username_peminjaman' required placeholder='Username'>
 
                         <div class='form-group'>
                             <label>Literatur</label>
@@ -35,6 +34,7 @@
                                 <select name="id_literatur" id="id_literatur"></select>
                             </p>
                         </div>
+                        <input type="hidden" id="usernameLogin" name="username_peminjaman" th:value="${#httpServletRequest.remoteUser}" />
                         <div class='form-group'>
                             <label>Jenis Literatur</label>
                             <p>
@@ -44,13 +44,13 @@
                         <div class='form-group'>
                             <label>Tanggal Peminjaman</label>
                             <p>
-                                <input type='date' value='' class='form-control input-sm' name='tanggal_peminjaman' required placeholder='Tanggal Peminjaman' >
+                                <input type='text' value='' class='form-control input-sm' name='tanggal_peminjaman' required placeholder='Tanggal Peminjaman' disabled="disabled" >
                             </p>
                         </div>
                         <div class='form-group'>
                             <label>Tanggal Pengembalian</label>
                             <p>
-                                <input type='date' value='' class='form-control input-sm' name='tanggal_pengembalian' required placeholder='Tanggal Pengembalian'>
+                                <input type='text' value='' class='form-control input-sm' name='tanggal_pengembalian' required placeholder='Tanggal Pengembalian' disabled="disabled">
                             </p>
                         </div>
                         <div class='form-group'>
@@ -150,6 +150,7 @@ function load_dropdown_literatur(){
             },
             onChange: function(value){
                 getJenisLiteratur(value);
+                 $("input[name='tanggal_peminjaman']").prop('disabled', false);
             }
         });
     var literatur = $literatur[0].selectize;
@@ -159,8 +160,8 @@ function getJenisLiteratur(literatur){
     $.ajax({
         url: "/peminjaman/getJenisLiteratur/"+literatur,
         type: "GET",
-        error: function(){
-            callback();
+        error: function(e){
+            console.log(e);
         },
         success: function(res){
             $("input[name='jenis_literatur']").val(res);
@@ -192,19 +193,38 @@ $("#action").click(function () {
     var result = form.valid();
     $("label.error").css('color','red');
     if(result){
+        var data = {
+            id_literatur : $("#id_literatur").val(),
+            username_peminjaman: $("#usernameLogin").val(),
+            tanggal_peminjaman: $("input[name='tanggal_peminjaman']").val(),
+            tanggal_pengembalian: $("input[name='tanggal_pengembalian']").val(),
+            id_surat: $("input[name='id_surat']").val()
+        }
+
         $.ajax({
             url:'/peminjaman/tambah',
-            method:'post',
+            type:'post',
             data:{
-                data:JSON.stringify(form.serializeArray())
+                data: JSON.stringify(data)
             },
             dataType:'json',
             success: function (resp) {
+                if(resp){
+
+                    $("#modal-berhasil").modal("show");
+                    $("#pesanBerhasil").html("");
+                    $("#pesanBerhasil").append("Berhasil meminjam Literatur");
+                }else{
+                    $("#modal-gagal").modal("show");
+                    $("#pesan").html("");
+                    $("#pesan").append("Tidak dapat meminjam Literatur");
+
+                }
                 console.log(resp);
             },
             error: function(e){
                 console.log ("Error " + e[0]);
-                console.log ("Error " + e[1]);
+
             }
         });
     }
@@ -217,6 +237,50 @@ var delay = (function(){
     timer = setTimeout(callback, ms);
   };
 })();
+
+
+var date = new Date();
+date.setDate(date.getDate()-1);
+$("input[name='tanggal_peminjaman']").datepicker({
+    autoclose: true,
+    startDate: date,
+    format: 'yyyy-mm-dd'
+}).on('changeDate', function(ev){
+    $("input[name='tanggal_pengembalian']").prop('disabled',false);
+});
+
+$("input[name='tanggal_pengembalian']").datepicker({
+    autoclose: true,
+    startDate: date,
+    format: 'yyyy-mm-dd'
+}).on('changeDate', function(ev){
+    //alert($("input[name='tanggal_pengembalian']").val());
+    var data = {
+        id_literatur: $("#id_literatur").val(),
+        tanggal_peminjaman: $("input[name='tanggal_peminjaman']").val(),
+        tanggal_pengembalian: $("input[name='tanggal_pengembalian']").val()
+    }
+
+    $.ajax({
+        url:'/peminjaman/checkstatuspeminjaman',
+        type:'get',
+        data:{
+            data: JSON.stringify(data)
+        },
+        dataType:'json',
+        success: function (resp) {
+            if(resp){
+                $("#modal-gagal").modal("show");
+                $("#pesan").html("");
+                $("#pesan").append("Literatur Sedang Dipinjam");
+            }
+        },
+        error: function(e){
+            console.log ("Error " + e[0]);
+
+        }
+    });
+});
 
 $("input[name='id_surat']").keyup(function(e) {
     if (e.keyCode > 47 || e.keyCode < 58) {

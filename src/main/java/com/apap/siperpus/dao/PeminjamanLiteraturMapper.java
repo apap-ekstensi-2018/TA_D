@@ -40,15 +40,20 @@ public interface PeminjamanLiteraturMapper {
 	})
 	List<PeminjamanLiteraturModel> selectAllPeminjamanLiteratur();
 	
-	@Insert("INSERT INTO peminjaman_literatur VALUES '("
+	@Insert("INSERT INTO peminjaman_literatur (id_literatur,username_peminjaman,tanggal_peminjaman,tanggal_pengembalian,status_peminjaman,id_surat) VALUES ("
 			+ "#{id_literatur},"
 			+ "#{username_peminjaman},"
-			+ "#{tanggal_peminjaman}"
-			+ "#{tanggal_pengembalian}"
-			+ "#{status_peminjaman}"
+			+ "#{tanggal_peminjaman},"
+			+ "#{tanggal_pengembalian},"
+			+ "#{status_peminjaman},"
 			+ "#{id_surat}"
 			+ ")")
-	void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur);
+	void insertPeminjamanLiteratur(@Param("id_literatur") String id_literatur,
+								   @Param("username_peminjaman") String username_peminjaman,
+								   @Param("tanggal_peminjaman") String tanggal_peminjaman,
+								   @Param("tanggal_pengembalian") String tanggal_pengembalian,
+								   @Param("status_peminjaman") String status_peminjaman,
+								   @Param("id_surat") String id_surat);
 	
 	@Update("UPDATE peminjaman_literatur SET "
 			+ "id_literatur=#{id_literatur},"
@@ -71,4 +76,12 @@ public interface PeminjamanLiteraturMapper {
 			"id_surat = #{peminjaman.id_surat}" +
 			"where id = #{peminjaman.id}")
 	void ubahPeminjaman(@Param("peminjaman") PeminjamanLiteraturModel peminjaman);
+
+	@Select("SELECT count(*) FROM peminjaman_literatur " +
+			"where " +
+			"status_peminjaman='Belum dikembalikan' and " +
+			"id_literatur=#{peminjaman.id_literatur} and " +
+			"convert(tanggal_peminjaman,date) <= convert(#{peminjaman.tanggal_pengembalian},date) and " +
+			"convert(tanggal_pengembalian,date) >= convert(#{peminjaman.tanggal_peminjaman},date)")
+	Integer selectLiteraturBasedOnTanggal (@Param("peminjaman") PeminjamanLiteraturModel peminjaman);
 }

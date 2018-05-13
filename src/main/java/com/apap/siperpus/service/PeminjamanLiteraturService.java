@@ -8,9 +8,16 @@ public interface PeminjamanLiteraturService {
 	
 	PeminjamanLiteraturModel selectPeminjamanLiteraturById(int id);
 	
-	void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur);
+	void insertPeminjamanLiteratur(String id_literatur,
+								   String username_peminjaman,
+								   String tanggal_peminjaman,
+								   String tanggal_pengembalian,
+								   String status_peminjaman,
+								   String id_surat);
 
 	PeminjamanLiteraturModel selectJumlahPeminjaman(int id);
 
 	void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur);
+
+	Integer selectLiteraturBasedOnTanggal (PeminjamanLiteraturModel peminjaman);
 }

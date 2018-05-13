@@ -30,8 +30,13 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 
 
 	@Override
-	public void insertPeminjamanLiteratur(PeminjamanLiteraturModel peminjamanLiteratur) {
-		peminjamanLiteraturMapper.insertPeminjamanLiteratur(peminjamanLiteratur);
+	public void insertPeminjamanLiteratur(String id_literatur,
+										  String username_peminjaman,
+										  String tanggal_peminjaman,
+										  String tanggal_pengembalian,
+										  String status_peminjaman,
+										  String id_surat) {
+		peminjamanLiteraturMapper.insertPeminjamanLiteratur(id_literatur,username_peminjaman,tanggal_peminjaman,tanggal_pengembalian,status_peminjaman,id_surat);
 	}
 
 	@Override
@@ -43,5 +48,10 @@ public class PeminjamanLiteraturServiceDatabase implements PeminjamanLiteraturSe
 	@Override
 	public void ubahPeminjaman(PeminjamanLiteraturModel peminjamanLiteratur){
 		peminjamanLiteraturMapper.ubahPeminjaman(peminjamanLiteratur);
+	}
+
+	@Override
+	public Integer selectLiteraturBasedOnTanggal(PeminjamanLiteraturModel peminjaman){
+		return peminjamanLiteraturMapper.selectLiteraturBasedOnTanggal(peminjaman);
 	}
 }
