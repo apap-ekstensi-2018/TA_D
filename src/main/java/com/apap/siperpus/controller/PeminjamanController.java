@@ -197,7 +197,7 @@ public class PeminjamanController {
     @RequestMapping(value = "/ubah/submit", method = RequestMethod.POST)
     public String ubahPeminjamanSubmit(@ModelAttribute PeminjamanLiteraturModel peminjamanLiteraturModel) {
         peminjamanDAO.ubahPeminjaman(peminjamanLiteraturModel);
-        return "redirect:peminjaman/tambah";
+        return "redirect:/peminjaman/viewall";
     }
 
 
