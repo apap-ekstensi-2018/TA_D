@@ -48,7 +48,6 @@ public class PengadaanLiteraturController {
 		
 	    List<PengadaanLiteraturModel> pengadaanLiteraturs = new ArrayList<PengadaanLiteraturModel>();
 	    List<PeminjamanLiteraturModel> peminjamanLiteraturs = new ArrayList<PeminjamanLiteraturModel>();
-	    System.out.println("BEWE staff : " + user.getRole() );
 	    if(user.getRole().equals(ROLE_STAFF)) {
 	    		pengadaanLiteraturs = pengadaanLiteraturDAO.selectAllPengadaanLiteratur();
 	    }
