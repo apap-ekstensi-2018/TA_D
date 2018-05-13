@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PengadaanLiteraturModel {
 	private int id;
-	private String usernameRequester;
+	private String username_requester;
 	private String judul;
 	private String penulis;
 	private String penerbit;

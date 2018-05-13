@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.*;
+import com.apap.siperpus.model.SuratReturnModel;
+import com.apap.siperpus.service.SuratService;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.List;
 
 @Controller
@@ -22,6 +27,9 @@ public class PeminjamanController {
 
     @Autowired
     LiteraturService literaturDAO;
+
+    @Autowired
+    SuratService suratDAO;
 
     @Autowired
     PeminjamanLiteraturService peminjamanDAO;
@@ -42,12 +50,82 @@ public class PeminjamanController {
         return "Peminjaman/detailPeminjaman";
     }
 
+    @RequestMapping(value="/tambah", method=RequestMethod.POST)
+    public @ResponseBody Boolean tambahPeminjaman(Model model, @ModelAttribute("data") String data) {
+        try
+        {
+            JSONObject dataArray = new JSONObject(data);
+            /*PeminjamanLiteraturModel peminjamanLiteratur = new PeminjamanLiteraturModel();
+            peminjamanLiteratur.setId_literatur(Integer.parseInt(dataArray.getString("id_literatur")));
+            peminjamanLiteratur.setUsername_peminjaman(dataArray.getString("username_peminjaman"));
+            peminjamanLiteratur.setTanggal_peminjaman(dataArray.getString("tanggal_peminjaman"));
+            peminjamanLiteratur.setTanggal_pengembalian(dataArray.getString("tanggal_pengembalian"));
+            peminjamanLiteratur.setStatus_peminjaman("Belum diproses");
+            peminjamanLiteratur.setId_surat(dataArray.getString("id_surat"));*/
+            peminjamanDAO.insertPeminjamanLiteratur(dataArray.getString("id_literatur"),
+                    dataArray.getString("username_peminjaman"),
+                    dataArray.getString("tanggal_peminjaman"),
+                    dataArray.getString("tanggal_pengembalian"),
+                    "Belum diproses",
+                    dataArray.getString("id_surat"));
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
 
+
+    @RequestMapping(value="/checkstatuspeminjaman", method= RequestMethod.GET)
+    public @ResponseBody Boolean cekStatusPeminjamanLiteratur(Model model, @ModelAttribute("data") String data)
+    {
+        JSONObject dataArray = new JSONObject(data);
+        PeminjamanLiteraturModel peminjamanLiteraturModel = new PeminjamanLiteraturModel();
+        peminjamanLiteraturModel.setId_literatur(Integer.parseInt(dataArray.getString("id_literatur")));
+        peminjamanLiteraturModel.setTanggal_peminjaman(dataArray.getString("tanggal_peminjaman"));
+        peminjamanLiteraturModel.setTanggal_pengembalian(dataArray.getString("tanggal_pengembalian"));
+        if(peminjamanDAO.selectLiteraturBasedOnTanggal(peminjamanLiteraturModel) > 0)
+            return true;
+        else
+            return false;
+
+    }
     @RequestMapping(value="/select/literatur", method= RequestMethod.GET)
     public ResponseEntity<List<LiteraturModel>> selectLiteratur(Model model)
     {
         List<LiteraturModel> literaturModels = literaturDAO.selectAllLiteratur();
         return new ResponseEntity<List<LiteraturModel>>(literaturModels, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/getJenisLiteratur/{literatur}", method= RequestMethod.GET)
+    public ResponseEntity<String> getJenisLiteratur(Model model, @PathVariable(value = "literatur") int literatur)
+    {
+        LiteraturModel literaturModels = literaturDAO.selectJenisLiteratur(literatur);
+        return new ResponseEntity<String>(literaturModels.getJenis_literatur(), HttpStatus.OK);
+    }
+
+    @RequestMapping("/surat/view/{id_literatur}")
+    public String  getSurat(Model model, @PathVariable(value = "id_literatur") String id_literatur)
+    {
+        SuratReturnModel surat = suratDAO.selectSurat(id_literatur);
+        model.addAttribute("surat", surat.getSurat().getId_mahasiswa());
+        return "Peminjaman/coba";
+    }
+
+    @RequestMapping(value="/cekStatusSurat", method = RequestMethod.POST)
+    public ResponseEntity<?> cekStatusSurat(Model model, @ModelAttribute("data") String data) throws JSONException
+    {
+        JSONObject dataArray = new JSONObject(data);
+        SuratReturnModel surat = suratDAO.selectSurat(dataArray.getString("id_surat"));
+        if(surat.getStatus().equals("200"))
+        {
+            return new ResponseEntity<SuratReturnModel>(surat, HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<SuratReturnModel>(surat, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public String selectJudulLiteraturById(int id)

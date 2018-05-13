@@ -54,4 +54,7 @@ public interface LiteraturMapper {
 
     @Select("select * from literatur where jenis_literatur like CONCAT('%',#{jenis_literatur},'%')")
     List<LiteraturModel> selectLiteraturWithConditionTypeOfLiteature(@Param("jenis_literatur") String jenis_literatur);
+
+    @Select("select * from literatur where id = #{id}")
+    LiteraturModel selectJenisLiteratur(int id);
 }

@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.apap.siperpus.model.LiteraturModel;
+import com.apap.siperpus.model.UserAccountModel;
 import com.apap.siperpus.service.LiteraturService;
+import com.apap.siperpus.service.UserAccountService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created on : April 24, 2018 Author : Kurniawan Hendi Wijaya Name : Hendi
  */
+@Slf4j
 @Controller
 @RequestMapping("/literatur")
 public class LiteraturController {
@@ -34,6 +42,9 @@ public class LiteraturController {
 
 	@Autowired
 	LiteraturService literaturDAO;
+	
+	@Autowired
+	UserAccountService userAccountDAO;
 
 	@RequestMapping("/ubah/{id}")
 	public String ubahLiteratur(Model model, @PathVariable(value = "id") int id) {
@@ -60,8 +71,18 @@ public class LiteraturController {
 
 	@RequestMapping("/viewall")
 	public String lihatDaftarLiteratur(Model model) {
-		List<LiteraturModel> literaturs = literaturDAO.selectAllLiteratur();
-		model.addAttribute("literaturs", literaturs);
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String username = authentication.getName();
+			UserAccountModel user = userAccountDAO.selectUserAccountByUsername(username);
+			model.addAttribute("role", user.getRole());
+			
+			List<LiteraturModel> literaturs = literaturDAO.selectAllLiteratur();
+			model.addAttribute("literaturs", literaturs);
+		} catch (Exception e) {
+			log.error("MainController, index, error : " , e);
+		}
+    		
 		return "Literatur/daftarLiteratur";
 	}
 
@@ -100,11 +121,12 @@ public class LiteraturController {
 	//Gani Gemilar
 	@RequestMapping(value = "/upload/submit", method = RequestMethod.POST)
 	public String submitKaryaTulis(@ModelAttribute("literatur") LiteraturModel literatur, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Model model) {
-		if (!file.isEmpty()) {
+		if (!file.isEmpty() && file.getOriginalFilename().contains(".pdf")) {
 			try {
 				byte[] bytes = file.getBytes();
 				Path path = Paths.get(PATH_FILE_UPLOAD + file.getOriginalFilename());
 				System.err.println(path.toString());
+				System.err.println(file.getOriginalFilename().split("."));
 				Files.write(path, bytes);
 				//System.out.println(literatur.getJudul()+ " "+ literatur.getPenulis());
 				literaturDAO.insertLiteratur(literatur.getJudul(), literatur.getPenulis(), literatur.getPenerbit(), literatur.getJenis_literatur(), 1);
@@ -113,6 +135,9 @@ public class LiteraturController {
 			} finally {
 				return "redirect:/literatur/upload";
 			}
+		} else {
+			model.addAttribute("alertinfo", true);
+			model.addAttribute("messagealert", "Format file harus PDF!");
 		}
 		return "redirect:/literatur/upload";
 	}
