@@ -120,7 +120,7 @@
                             <i class="fa fa-list-alt"></i> <span>Peminjaman</span>
                         </a>
                     </li>
-                    <li class="active treeview">
+                    <li class="active treeview" th:if="${#httpServletRequest.isUserInRole('MAHASISWA')}" >
                         <a href="/literatur/upload">
                             <i class="fa fa-file-text"></i> <span>Karya Tulis</span>
                         </a>
