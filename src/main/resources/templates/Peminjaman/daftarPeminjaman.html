@@ -23,7 +23,7 @@
             <!-- Main content -->
             <section class="content" style="min-height:800px !important;">
             		<div class="text-right">
-				 	<a th:if="${role != null AND role != 'ROLE_STAF'}" href="#" class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true" ></i> Tambah data</a>
+				 	<a th:if="${role != null AND role != 'ROLE_STAF'}" href="/peminjaman/tambah" class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true" ></i> Tambah data</a>
 				 </div>
 				 <br/>
             		<!-- TABLE: LATEST ORDERS -->
@@ -82,7 +82,7 @@
         </div>
         <!-- /.content-wrapper -->
 
-        <footer th:replace="fragments/fragment :: footer-an"></footer>
+        <footer th:replace="fragments/fragment :: footer"></footer>
         <div th:replace="fragments/fragment :: javascriptTable"></div>
     </div>
 </body>
