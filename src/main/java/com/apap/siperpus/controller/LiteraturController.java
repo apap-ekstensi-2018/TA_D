@@ -57,13 +57,14 @@ public class LiteraturController {
 	@RequestMapping(value = "/ubah/submit", method = RequestMethod.POST)
 	public String ubahLiteraturSubmit(@ModelAttribute LiteraturModel literaturModel) {
 		System.out.println("Literatur id : " + literaturModel.getId());
+		System.out.println(literaturModel.getStatus());
 		literaturDAO.ubahLiteratur(literaturModel);
 		return "redirect:/literatur/viewall";
 	}
 
 	@RequestMapping("/view/{id}")
 	public String viewLiteratur(Model model, @PathVariable(value = "id") int id) {
-		LiteraturModel literatur = literaturDAO.selectLiteratur(id);
+		LiteraturModel literatur = literaturDAO.selectDetailLiteratur(id);
 		model.addAttribute("literatur", literatur);
 		return "Literatur/detailLiteratur";
 	}

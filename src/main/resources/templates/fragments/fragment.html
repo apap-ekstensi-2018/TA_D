@@ -120,11 +120,6 @@
                             <i class="fa fa-list-alt"></i> <span>Peminjaman</span>
                         </a>
                     </li>
-                    <li class="active treeview">
-                        <a href="/peminjaman/viewall">
-                            <i class="fa fa-plus-square"></i> <span>Pengajuan</span>
-                        </a>
-                    </li>
                     <li class="active treeview" th:if="${#httpServletRequest.isUserInRole('MAHASISWA')}" >
                         <a href="/literatur/upload">
                             <i class="fa fa-file-text"></i> <span>Karya Tulis</span>

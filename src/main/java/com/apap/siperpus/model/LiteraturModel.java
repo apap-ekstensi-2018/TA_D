@@ -20,4 +20,6 @@ public class LiteraturModel {
     private String jenis_literatur;
     private int jumlah;
     private int status;
+    private int jumlah_pinjam;
+    private String last_status;
 }

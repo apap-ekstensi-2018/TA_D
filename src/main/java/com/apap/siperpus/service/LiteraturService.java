@@ -17,6 +17,8 @@ public interface LiteraturService {
 
     LiteraturModel selectLiteratur(int id);
 
+    LiteraturModel selectDetailLiteratur(int id);
+
     void ubahLiteratur (LiteraturModel literatur);
 
     LiteraturModel selectLiteraturByJudul(String judul);
