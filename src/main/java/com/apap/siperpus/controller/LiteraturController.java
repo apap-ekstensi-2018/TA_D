@@ -95,6 +95,7 @@ public class LiteraturController {
 		return "redirect:/literatur/viewall";
 	}
 
+	//Gani Gemilar
 	@RequestMapping(value = "/upload/submit", method = RequestMethod.POST)
 	public String submitKaryaTulis(@ModelAttribute("literatur") LiteraturModel literatur, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Model model) {
 		if (!file.isEmpty()) {
@@ -114,6 +115,7 @@ public class LiteraturController {
 		return "redirect:/literatur/upload";
 	}
 
+	//Gani Gemilar
 	@RequestMapping("/upload")
 	public String uploadKaryaTulis(Model model) {
 		String[] jenisLiteratur = {"Jurnal", "Buku Referensi", "Publikasi", "Tugas Akhir", "Skripsi", "Tesis", "Disertasi"};
