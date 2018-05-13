@@ -12,7 +12,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Tambah Literatur
+                    Upload Karya Ilmiah
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
@@ -24,6 +24,9 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
+                    	<div class="alert alert-danger" th:if="${alertinfo}">
+  							<strong>Danger!</strong><div th:text="${messagealert}"></div>
+						</div>
                         <form action="/literatur/upload/submit" method="POST" id="form" enctype="multipart/form-data" th:object="${literatur}">
                             <div class='form-group'>
                                 <label>Judul</label>
