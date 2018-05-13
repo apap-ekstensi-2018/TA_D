@@ -23,7 +23,8 @@
             <!-- Main content -->
             <section class="content" style="min-height:800px !important;">
             		<div class="text-right">
-				 	<a href="/literatur/tambah" class="btn btn-default">Tambah data</a>
+				 	<a th:if="${role != null AND role == 'ROLE_STAF'}" th:href="'/literatur/tambah'" class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true" ></i> Tambah data</a>
+				 	<a th:href="'/literatur/cari/'" class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Cari data</a>
 				 </div>
 				 <br/>
             		<!-- TABLE: LATEST ORDERS -->
@@ -31,7 +32,7 @@
 				  	<!-- /.box-header -->
 					 <div class="box-body">
 					   <div class="table-responsive">
-						 <table class="table no-margin">
+						 <table class="table no-margin" id="daftarLiteratur" >
 						   <thead>
 						   <tr>
 							 <th>Judul</th>
@@ -55,10 +56,10 @@
 								<a th:href="'/literatur/view/'+${literatur.id }" class="btn btn-info btn-xs ad-click-event" >
 									<i class="fa fa-share" aria-hidden="true"></i>
 								 </a>
-								 <a th:href="'/literatur/ubah/'+${literatur.id }" class="btn btn-warning btn-xs ad-click-event">
+								 <a th:if="${role != null AND role == 'ROLE_STAF'}" th:href="'/literatur/ubah/'+${literatur.id }" class="btn btn-warning btn-xs ad-click-event">
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 								 </a>
-								 <a class="btn btn-danger btn-xs ad-click-event" data-toggle="modal" th:attr="data-target='#modal-delete'+${literatur.id }">
+								 <a th:if="${role != null AND role == 'ROLE_STAF'}" class="btn btn-danger btn-xs ad-click-event" data-toggle="modal" th:attr="data-target='#modal-delete'+${literatur.id }">
 									<i class="fa fa-times" aria-hidden="true"></i>
 								 </a>
 
@@ -94,10 +95,6 @@
 					 </div>
 					 <!-- /.box-body -->
 					 <!-- /.box-footer -->
-					 <div class="box-footer">
-						 <a href="/literatur/tambah" class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true"></i> Tambah data</a>
-						 <a href="/literatur/cari/" class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Cari data</a>
-					 </div>
 				</div>
 				<!-- /.box -->
             </section>
