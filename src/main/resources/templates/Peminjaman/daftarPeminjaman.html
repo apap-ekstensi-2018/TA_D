@@ -12,25 +12,25 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Lihat Daftar Peminjaman
+                    Daftar Peminjaman
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-book"></i> Home</a></li>
-                    <li class="active">Lihat Daftar Literatur</li>
+                    <li class="active">Daftar Literatur</li>
                 </ol>
             </section>
 
             <!-- Main content -->
             <section class="content" style="min-height:800px !important;">
             		<div class="text-right">
-				 	<a href="/literatur/tambah" class="btn btn-default">Tambah data</a>
+				 	<a th:if="${role != null AND role != 'ROLE_STAF'}" href="#" class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true" ></i> Tambah data</a>
 				 </div>
 				 <br/>
             		<!-- TABLE: LATEST ORDERS -->
 				<div class="box box-info">
 				  <!-- /.box-header -->
 				 <div class="box-body">
-				     <table class="table no-margin">
+				     <table class="table no-margin" id="daftarLiteratur" >
 				       <thead>
 				       <tr th:if="${role} == 'ROLE_STAF' " th:each = "pengadaanLiteratur,iterationStatus: pengadaanLiteraturs">
 				         <th>Username Pengaju</th>
@@ -40,33 +40,33 @@
 				         <th>Status</th>
 				       </tr>
 				       <tr th:unless="${role} == 'ROLE_STAF' " th:each = "peminjamanLiteratur,iterationStatus: peminjamanLiteraturs">
-				         <th>Nama Literatur</th>
+				         <th>Literatur</th>
 				         <th>Username Peminjam</th>
 				         <th>Tanggal peminjaman</th>
 				         <th>Tanggal Pengembalian</th>
 				         <th>Status Peminjaman</th>
-				         <th>Surat</th>
 				       </tr>
 				       </thead>
 				       <tbody>
-				       <p th:text="${pengadaanLiteraturs}"></p>
-				        <tr th:if="${pengadaanLiteraturs != null AND !pengadaanLiteraturs.isEmpty() AND role == 'ROLE_STAF'}" 
-				        		th:each = "pengadaanLiteratur,iterationStatus: pengadaanLiteraturs">
-				       	 <td th:text= "${pengadaanLiteratur.usernameRequester}"></td>
+				       <tr th:if="${pengadaanLiteraturs != null AND !pengadaanLiteraturs.isEmpty() AND role == 'ROLE_STAF'}" 
+				        		th:each = "pengadaanLiteratur,iterationStatus: ${pengadaanLiteraturs}">
+				       	 <td th:text= "${pengadaanLiteratur.username_requester}"></td>
 				         <td th:text= "${pengadaanLiteratur.judul}"></td>
-				         <td th:text= "${pengadaanLiteratur.penerbit}"></td>
 				         <td th:text= "${pengadaanLiteratur.penulis}"></td>
 				         <td th:text= "${pengadaanLiteratur.penerbit}"></td>
-				         <td th:text= "${pengadaanLiteratur.status} ? 'Aktif' : 'Non Aktif'"></td>
+				         <td th:text= "${pengadaanLiteratur.status}"></td>
 				       </tr>
-				       <tr th:if="${peminjamanLiteraturs != null AND !peminjamanLiteraturs.isEmpty() AND role == 'ROLE_STAF'}" 
-				        		th:each = "peminjamanLiteratur,iterationStatus: peminjamanLiteratur">
-				       	 <td th:text= "${peminjamanLiteratur.id_literatur}"></td>
+				       <tr th:if="${peminjamanLiteraturs != null AND !peminjamanLiteraturs.isEmpty() AND role != 'ROLE_STAF'}" 
+				        		th:each = "peminjamanLiteratur,iterationStatus: ${peminjamanLiteraturs}">
+				       	 <td>
+				       	 	<a th:href="'/literatur/view/'+${peminjamanLiteratur.id_literatur }" class="btn btn-info btn-xs ad-click-event" >
+								<i class="fa fa-share" aria-hidden="true"></i> Detail Literatur
+							 </a>
+				       	 </td>
 				         <td th:text= "${peminjamanLiteratur.username_peminjaman}"></td>
 				         <td th:text= "${peminjamanLiteratur.tanggal_peminjaman}"></td>
 				         <td th:text= "${peminjamanLiteratur.tanggal_pengembalian}"></td>
 				         <td th:text= "${peminjamanLiteratur.status_peminjaman}"></td>
-				         <td th:text= "${peminjamanLiteratur.id_surat}"></td>
 				       </tr>
 				       </tbody>
 				     </table>
