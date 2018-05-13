@@ -26,18 +26,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.csrf().disable()
-		.authorizeRequests()
-		.antMatchers("/resources/**").permitAll()
-		.antMatchers("/literatur/tambah","/literatur/ubah","/literatur/delete/**","/peminjaman/ubah/**").hasRole(ROLE_STAFF)
-		.antMatchers("/literatur/viewall","/index","/literatur/view/**", "/peminjaman/view/**").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA, ROLE_STAFF)
-		.antMatchers("/peminjaman/tambah").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA)
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login").permitAll()
-		.and()
-		.logout().permitAll();
+				.csrf().disable()
+				.authorizeRequests()
+				.antMatchers("/resources/**").permitAll()
+				.antMatchers("/literatur/tambah","/literatur/ubah","/literatur/delete/**","/peminjaman/ubah/**").hasRole(ROLE_STAFF)
+				.antMatchers("/literatur/viewall","/index","/literatur/view/**", "/peminjaman/view/**").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA, ROLE_STAFF)
+				.antMatchers("/peminjaman/tambah").hasAnyRole(ROLE_DOSEN, ROLE_MAHASISWA)
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.loginPage("/login").permitAll()
+				.and()
+				.logout().permitAll();
 	}
 	
 	@Autowired
