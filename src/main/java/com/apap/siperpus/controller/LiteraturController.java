@@ -99,11 +99,12 @@ public class LiteraturController {
 	//Gani Gemilar
 	@RequestMapping(value = "/upload/submit", method = RequestMethod.POST)
 	public String submitKaryaTulis(@ModelAttribute("literatur") LiteraturModel literatur, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Model model) {
-		if (!file.isEmpty()) {
+		if (!file.isEmpty() && file.getOriginalFilename().contains(".pdf")) {
 			try {
 				byte[] bytes = file.getBytes();
 				Path path = Paths.get(PATH_FILE_UPLOAD + file.getOriginalFilename());
 				System.err.println(path.toString());
+				System.err.println(file.getOriginalFilename().split("."));
 				Files.write(path, bytes);
 				//System.out.println(literatur.getJudul()+ " "+ literatur.getPenulis());
 				literaturDAO.insertLiteratur(literatur.getJudul(), literatur.getPenulis(), literatur.getPenerbit(), literatur.getJenis_literatur(), 1);
@@ -112,6 +113,9 @@ public class LiteraturController {
 			} finally {
 				return "redirect:/literatur/upload";
 			}
+		} else {
+			model.addAttribute("alertinfo", true);
+			model.addAttribute("messagealert", "Format file harus PDF!");
 		}
 		return "redirect:/literatur/upload";
 	}
